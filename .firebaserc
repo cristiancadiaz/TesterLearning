@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "testerlearning-21e1c": {
+      "hosting": {
+        "TesterLearning": [
+          "testerlearning-21e1c"
+        ]
+      }
+    }
+  }
+}
