@@ -4,19 +4,22 @@
     font-family: -webkit-pictograph;
     font-size: 32px;
     font-style: italic;
-    color: initial;
+    color: #FAFAFA;
 }
 
 .title{
-    font-size: 28px;
+    font-size: 48px;
     text-align: center;
     font-style: oblique;
     font-family: cursive;
-    color: initial;
+    color: #FAFAFA;
 }
 
 .background{
-    background-image: url(..//..//../assets/Home.png);
+    /*background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(42,7,125,1) 44%, rgba(0,212,255,1) 100%);*/
+    background: rgb(63,94,251);
+    background: linear-gradient(0deg, rgba(63,94,251,1) 0%, rgba(6,247,127,0.5102415966386555) 100%);
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
