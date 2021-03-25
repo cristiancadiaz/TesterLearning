@@ -6,6 +6,9 @@ export const TAGS = {
     EVENT: {},
     LABELS: {}
 };
+export const SERVICES = {
+    USERS : 'Users'
+};
 
 export const DNI_TYPES = [
   { value: 'CC', name: 'Cedula de Ciudadania' },
