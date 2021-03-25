@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChapterService } from 'src/app/services/chapter.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public users = [];
+  public users1 = [];
+
+  constructor(public chapter: ChapterService) { }
   styleObj: any;
   arrModules = [
     {
@@ -54,7 +58,18 @@ export class HomeComponent implements OnInit {
     },
   ]
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.chapter.getChapters().subscribe((result)=>{
+      this.users = [];
+      result.forEach((chapterData: any) =>{
+        this.users.push({
+          id: chapterData.payload.doc.id,
+          data: chapterData.payload.doc.data()
+        })
+      })
+      console.log(this.users);
+    });
+    this.chapter.getChapterbyID();    
   }
 
 }
