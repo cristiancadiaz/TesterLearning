@@ -11,12 +11,13 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
   },
-  { path: 'login',
-    loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) 
+  {
+    path: 'chapter',
+    loadChildren: () => import('./pages/chapter/chapter.module').then(m => m.ChapterModule)
   },
-  { path: 'register',
-    loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) 
-  },
+  { path: '',
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) 
+  }
 ];
 
 @NgModule({

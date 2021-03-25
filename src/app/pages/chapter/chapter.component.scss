@@ -1,0 +1,23 @@
+.wrapperModule{
+    margin: 2%;
+    & .contentTitle{
+        margin-left: 10px;
+        display: flex;
+        justify-content: flex-start;
+        & > h1{
+            font-size: 3rem;
+        }
+    }
+    & .contentDetail{
+        margin-left: 10px;
+        display: flex;
+        & .contentSubTitle{
+            & >h2{
+                font-size: 2rem;
+            }
+        }
+    }
+}
+img{
+    width: 100%;
+}

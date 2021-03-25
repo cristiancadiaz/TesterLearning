@@ -7,8 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './auth/services/auth.service';
-import { ChapterService } from './services/chapter.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +17,7 @@ import { ChapterService } from './services/chapter.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
-  providers: [AuthService, ChapterService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
