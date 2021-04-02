@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChapterService } from 'src/app/services/chapter.service';
+import { CollectionService } from '../../services/collection.service';
+
+import { SERVICES } from "../../app.constants";
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +11,12 @@ import { ChapterService } from 'src/app/services/chapter.service';
 })
 export class HomeComponent implements OnInit {
 
-  public users = [];
+  public users: Array<User>;
   public users1 = [];
 
-  constructor(public chapter: ChapterService) { }
+  constructor(public collection: CollectionService) {
+    this.users = new Array<User>();
+   }
   styleObj: any;
   arrModules = [
     {
@@ -59,17 +64,17 @@ export class HomeComponent implements OnInit {
   ]
 
   ngOnInit() {
-    this.chapter.getChapters().subscribe((result)=>{
+    this.collection.getCollection(SERVICES.USERS).subscribe((result)=>{
       this.users = [];
       result.forEach((chapterData: any) =>{
-        this.users.push({
-          id: chapterData.payload.doc.id,
-          data: chapterData.payload.doc.data()
-        })
+        this.users.push({key: chapterData.payload.doc.id, ...chapterData.payload.doc.data()})
       })
       console.log(this.users);
     });
-    this.chapter.getChapterbyID();    
+
+    this.collection.getCollectionById(SERVICES.USERS,"l1wnSDlzWvDvBpEWdpdd").subscribe((result) =>{
+      console.log('result =>', result);
+      })
   }
 
 }
