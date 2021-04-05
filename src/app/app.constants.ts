@@ -7,7 +7,8 @@ export const TAGS = {
     LABELS: {}
 };
 export const SERVICES = {
-    USERS : 'Users'
+    USERS : 'Users',
+    SECTIONS : 'Sections'
 };
 
 export const DNI_TYPES = [
