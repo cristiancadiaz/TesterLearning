@@ -1,6 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
@@ -19,8 +20,9 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     this.auth.login(this.loginForm.value).then((res)=>{
-      this.router.navigate(['/home'])
+      this.router.navigate(['/dashboard'])
     })
   }
+
 
 }
