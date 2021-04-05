@@ -1,24 +1,46 @@
 import { Injectable } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { User } from '../models/user.model';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-  constructor(public afAuth: AngularFireAuth) { }
 
-  async login(email: string, password: string): Promise<any>{
-    const result = await this.afAuth.signInWithEmailAndPassword(email, password);
-    return result;
+  public userData$: Observable<firebase.default.User>
+  private currentUser: any;
+
+  
+  constructor(public afAuth: AngularFireAuth) {
+    this.userData$ = afAuth.authState;
   }
-  async register(email: string, password: string){
-    const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
-    return result;
+
+  login(user: User): Promise<any>{
+    return new Promise((resolve, reject) => {
+      this.afAuth.signInWithEmailAndPassword(user.email, user.password)
+      .then(userData => resolve(userData),
+      err=> reject(err));
+    })
+
+  }
+  async register(user: User){
+    const promiseCreateUser = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
+    const promiseUpdateUser = (await this.afAuth.currentUser).updateProfile({displayName: user.displayName})
+    return Promise.all([promiseCreateUser,promiseUpdateUser]);
   }
   async logout(){
     await this.afAuth.signOut();
   }
-  getCurrentUser(){
-    return this.afAuth.authState.pipe(first()).toPromise();
+  
+  isAuth(){
+    return this.afAuth.authState.pipe(map(auth=>auth))
+  }
+  getUser(){
+    return this.currentUser;
+  }
+  setUser(user: any){
+    this.currentUser = user;
   }
 }
 

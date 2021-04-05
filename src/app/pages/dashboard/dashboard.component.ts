@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { SERVICES } from '../../app.constants';
+import { User } from '../../models/user.model';
 import { CollectionService } from '../../services/collection.service';
 
-import { SERVICES } from "../../app.constants";
-import { User } from '../../models/user.model';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
+ 
   public users: Array<User>;
   public users1 = [];
 
-  constructor(public collection: CollectionService, public auth : AuthService, public route:Router) {
+  constructor(public collection: CollectionService) {
     this.users = new Array<User>();
    }
   styleObj: any;
@@ -74,11 +72,8 @@ export class HomeComponent implements OnInit {
       console.log(this.users);
     });
 
-    
-
     this.collection.getCollectionById(SERVICES.USERS,"l1wnSDlzWvDvBpEWdpdd").subscribe((result) =>{
       console.log('result =>', result);
       })
   }
-
 }
