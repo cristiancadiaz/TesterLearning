@@ -1,1 +1,26 @@
-<balloon-button  *ngFor="let ballon of arrModules; index as i;" [index]=i+1 [styleObj]=ballon></balloon-button>
+<div class="background">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                <h2 class="title">Bienvenido a TesterLearning</h2>
+                <h5 class="paragraph">Bienvenido a Tester Learning una herramienta en la que aprenderá los criterios
+                    básicos y esenciales
+                    para aprender a ser un Tester. En este curso podrás aprender las metodologías mas utilizadas en
+                    pruebas. Junto con las actitudes y aptitudes que debe tener un Tester en toda su formación.</h5>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="card" style="margin-right: 10px">
+                    <div class="card-body">
+                        <h1 class="text-center">TesterLearning</h1>
+                        <login></login>
+                        <!-- <signup></signup> -->
+                        <div class="form-group mt-3">
+                            <p>No tienes una cuenta. <a [routerLink]="['/register']">Registrate</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

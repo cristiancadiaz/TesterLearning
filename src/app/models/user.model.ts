@@ -1,7 +1,8 @@
 export class User {
     key: string;
-    name : string;
-    last_name : string;
+    displayName : string;
+    email: string;
+    password: string;
     photo : string;
     phone : string;
     id : string;

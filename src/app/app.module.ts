@@ -8,17 +8,18 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { CollectionService } from './services/collection.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
     AppRoutingModule, 
+    BrowserModule,
     ReactiveFormsModule, 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
-  providers: [CollectionService],
+  providers: [CollectionService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
