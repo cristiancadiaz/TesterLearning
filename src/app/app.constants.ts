@@ -4,7 +4,9 @@ export const version = 'Juan Pablo Hernandez';
 
 export const TAGS = {
     EVENT: {},
-    LABELS: {}
+    LABELS: {
+      BTN_MODULE: 'IR AL MODULO'
+    }
 };
 export const SERVICES = {
     USERS : 'Users',

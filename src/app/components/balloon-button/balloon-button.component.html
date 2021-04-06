@@ -1,7 +1,8 @@
-<div class="balloon-content" [ngStyle]="{'background': background, 'top.px': styleObj.position.top, 'left.px': styleObj.position.left}">
-    <span class="number" >{{index}}</span>
-    <div class="InfoContent">
-        <p>{{styleObj.title}}</p>
-        <span>{{styleObj.description}}</span>
-    </div>
-</div>
+<section class="stage" [ngStyle]="{'top.px': styleObj.position.top, 'left.px': styleObj.position.left,'right.px': styleObj.position.right}">
+    <figure class="ball" [ngStyle]="{'background': background}">
+        <span class="number" >{{index}}</span>
+        <span class="shadow-circle"></span>
+    </figure>
+</section>
+
+  

@@ -9,9 +9,17 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  currentUser: firebase.default.User;
+
   constructor(private auth:AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.auth.isAuth().subscribe((res)=>{
+      this.auth.setUser(res);
+      this.currentUser = this.auth.getUser();
+      console.log('getUser ', this.currentUser);
+      
+    })
   }
   
   logout(){

@@ -13,10 +13,9 @@ export class DashboardComponent implements OnInit {
  
   public users: Array<User>;
   public users1 = [];
+  public itemSelected: any
 
-  constructor(public collection: CollectionService) {
-    this.users = new Array<User>();
-   }
+
   styleObj: any;
   arrModules = [
     {
@@ -24,44 +23,49 @@ export class DashboardComponent implements OnInit {
       description: 'Definición de cada una de las fases.',
       bgc: `#3f51b5`,
       progress: 60,
-      position:{ top: 350, left: 300 }
+      position:{ top: 300, left: 0 }
     },
     {
       title: 'Modulo 2',
-      description: 'Test',
+      description: 'La descripcion del modulo 2',
       bgc: `#3f51b5`,
       progress: 20,
-      position:{ top: 200, left: 400 }
+      position:{ top: 150, left: 100 }
     },
     {
       title: 'Modulo 3',
-      description: 'Test',
+      description: 'La descripcion del modulo 3',
       bgc: `#3f51b5`,
       progress: 50,
-      position:{ top: 100, left: 550 }
+      position:{ top: 80, left: 300 }
     },
     {
       title: 'Modulo 4',
-      description: 'Test',
+      description: 'La descripcion del modulo 4',
       bgc: `#3f51b5`,
       progress: 10,
-      position:{ top: 100, left: 750 }
+      position:{ top: 80, right: 350 }
     },
     {
       title: 'Modulo 5',
-      description: 'Test',
+      description: 'La descripcion del modulo 5',
       bgc: `#3f51b5`,
       progress: 100,
-      position:{ top: 200, left: 900 }
+      position:{ top: 150, right: 100 }
     },
     {
       title: 'Modulo 6',
-      description: 'Test',
+      description: 'La descripcion del modulo 6',
       bgc: `#3f51b5`,
       progress: 80,
-      position:{ top: 350, left: 1000 }
+      position:{ top: 300, right: 0 }
     },
   ]
+
+  constructor(public collection: CollectionService) {
+    this.users = new Array<User>();
+    this.itemSelected = this.arrModules[0];
+   }
 
   ngOnInit() {
     this.collection.getCollection(SERVICES.USERS).subscribe((result)=>{
@@ -75,5 +79,8 @@ export class DashboardComponent implements OnInit {
     this.collection.getCollectionById(SERVICES.USERS,"l1wnSDlzWvDvBpEWdpdd").subscribe((result) =>{
       console.log('result =>', result);
       })
+  }
+  moduleSelect(item: any){
+    this.itemSelected = item;
   }
 }
