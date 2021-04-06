@@ -12,16 +12,22 @@ import { CollectionService } from '../../services/collection.service';
 export class ChapterComponent implements OnInit {
 
   idChapter: string;
-  public Sections: Array<Sections>;
+  public sections: Array<Sections>;
+  
 
-  constructor(private route: ActivatedRoute, private collectionService: CollectionService) { }
+  constructor(private route: ActivatedRoute, private collectionService: CollectionService) { 
+    this.sections = new Array<Sections>();
+  }
 
   ngOnInit(): void {
     this.idChapter = this.route.snapshot.paramMap.get('id');
 
     this.collectionService.getCollectionById(SERVICES.SECTIONS,"001").subscribe((result) =>{
-      console.log('result =>', result);
+      this.sections.push(...result['contentList'])
+      console.log(this.sections);     
       })
   }
+
+  
 
 }
