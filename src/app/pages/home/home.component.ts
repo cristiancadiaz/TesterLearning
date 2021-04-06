@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   public users: Array<User>;
   public users1 = [];
+  public flagLogin: boolean = true;
 
   constructor(public collection: CollectionService, public auth : AuthService, public route:Router) {
     this.users = new Array<User>();

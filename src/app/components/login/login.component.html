@@ -1,11 +1,32 @@
 <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" formControlName="email">
+    <div class="card-body">
+        <span class="bmd-formgroup">
+            <div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="material-icons">mail</i>
+                        </span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="Email..." formControlName="email">
+                </div>
+            </div>
+        </span>
+        <span class="bmd-formgroup">
+            <div>
+                <div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="material-icons">lock_outline</i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Password..."
+                            formControlName="password">
+                    </div>
+                </div>
+            </div>
+        </span>
     </div>
-    <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" class="form-control" formControlName="password">
-    </div>
-    <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+    <button type="submit" class="btn btn-info">Ingresar</button>
 </form>

@@ -11,7 +11,7 @@ export class SignupComponent implements OnInit {
 
   registerForm = new FormGroup({
     displayName: new FormControl('Christian Diaz'),
-    phone: new FormControl('3158745745'),
+    photo: new FormControl('gyhi'),
     email: new FormControl('cristian@gmail.com'),
     password: new FormControl('123456')
   })
