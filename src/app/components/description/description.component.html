@@ -1,9 +1,10 @@
 <div class="card card-nav-tabs text-center">
     <div class="card-body">
       <h4 class="card-title">{{item.title}}</h4>
+      <span class="badge badge-primary">Progreso: {{item.progress}}%</span>
       <p class="card-text">{{item.description}}</p>
     </div>
-    <div class="card-footer text-muted">
+    <div class="card-footer text-muted justify-content-center">
         <a href="javascript:;" class="btn btn-primary" (click)="redirectChapter(item.key)">{{TAGS.LABELS.BTN_MODULE}}</a>
     </div>
   </div>

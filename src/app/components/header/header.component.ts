@@ -11,14 +11,15 @@ export class HeaderComponent implements OnInit {
 
   currentUser: firebase.default.User;
 
+  $currentLocation: any;
+
   constructor(private auth:AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.$currentLocation = location.pathname;
     this.auth.isAuth().subscribe((res)=>{
       this.auth.setUser(res);
       this.currentUser = this.auth.getUser();
-      console.log('getUser ', this.currentUser);
-      
     })
   }
   

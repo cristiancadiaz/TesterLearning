@@ -1,8 +1,8 @@
-<section class="stage" [ngStyle]="{'top.px': styleObj.position.top, 'left.px': styleObj.position.left,'right.px': styleObj.position.right}">
-    <figure class="ball" [ngStyle]="{'background': background}">
+<div class="stage" [ngStyle]="{'top.px': styleObj.position.top, 'left.px': styleObj.position.left,'right.px': styleObj.position.right}">
+    <figure class="ball" [ngStyle]="{'background': background}" [class.active]="activeItem">
         <span class="number" >{{index}}</span>
         <span class="shadow-circle"></span>
     </figure>
-</section>
+</div>
 
   
