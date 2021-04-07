@@ -21,3 +21,9 @@
 img{
     width: 100%;
 }
+.carousel-indicators{
+    position: relative;
+    & > li{
+        background-color: #000;
+    }
+}

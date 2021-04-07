@@ -10,6 +10,7 @@ export const TAGS = {
 };
 export const SERVICES = {
     USERS : 'Users',
+    CHAPTERS: 'Chapters',
     SECTIONS : 'Sections'
 };
 

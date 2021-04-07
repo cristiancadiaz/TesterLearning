@@ -2,36 +2,36 @@
     <div class="contentTitle">
         <h1>Modulo 1</h1>
     </div>
-    <div class="row container" *ngFor="let section of sections; let i=index">
-        <div class="row">
+    <div class="row">
             <div class="col-md-3">
                 <div class="listContent">
                     <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li *ngFor="let section of sections; index as i" (click)="handlerActionSection(i)">{{section.title}}</li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="contentDetail">
-                            <div class="contentSubTitle">
-                                <h2>{{ section.title }}</h2>
-                            </div>
-                        </div>
-                        <div class="description" [innerHTML]="section.col1"></div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner">
+                      <div class="carousel-item" *ngFor="let section of sections; index as i" [class.active]="sectionActiveIndex == i">
+                          <div class="container">
+                            <section class="row">
+                                <div class="col-md-9">
+                                  <div class="description" [innerHTML]="section.col1"></div>
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="description" [innerHTML]="section.col2"></div>
+                                </div>
+                            </section>
+                          </div>
+                         
+                      </div>
                     </div>
-                    <div class="col-md-5">
-                        <img src="../../../assets/images/QA.png" alt="">
-                    </div>
-                </div>
-
+                    <ol class="carousel-indicators">
+                        <li id="dotsCarrousel_{{i}}"class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" data-slide-to="i" [class.active]="sectionActiveIndex == i" ></li>
+                      </ol>
+                  </div>
             </div>
-        </div>
-
     </div>
 
 </div>

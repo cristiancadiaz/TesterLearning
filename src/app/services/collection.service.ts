@@ -7,8 +7,8 @@ export class CollectionService {
 
   constructor(public db: AngularFirestore) { }
 
-  getCollection(name: string): Observable<any>  {
-    return this.db.collection(name).snapshotChanges();
+  getCollection(route: string): Observable<any>  {
+    return this.db.collection(route).snapshotChanges();
   }
   
   getCollectionById(name: string, id: string): Observable<any> {
