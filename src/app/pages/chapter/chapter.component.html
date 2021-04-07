@@ -11,10 +11,10 @@
                 </div>
             </div>
             <div class="col-md-9">
+                <h2>{{sections[sectionActiveIndex] ? sections[sectionActiveIndex].title : ''}}</h2>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner">
-                      <div class="carousel-item" *ngFor="let section of sections; index as i" [class.active]="sectionActiveIndex == i">
-                          <div class="container">
+                      <div id="sliderCarrousel_{{i}}" class="carousel-item" *ngFor="let section of sections; index as i" [class.active]="sectionActiveIndex == i">
                             <section class="row">
                                 <div class="col-md-9">
                                   <div class="description" [innerHTML]="section.col1"></div>
@@ -23,12 +23,10 @@
                                   <div class="description" [innerHTML]="section.col2"></div>
                                 </div>
                             </section>
-                          </div>
-                         
                       </div>
                     </div>
                     <ol class="carousel-indicators">
-                        <li id="dotsCarrousel_{{i}}"class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" data-slide-to="i" [class.active]="sectionActiveIndex == i" ></li>
+                        <li id="dotsCarrousel_{{i}}"class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" data-slide-to="i" [class.active]="sectionActiveIndex == i"></li>
                       </ol>
                   </div>
             </div>

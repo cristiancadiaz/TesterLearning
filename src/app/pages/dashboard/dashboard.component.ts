@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   styleObj: any;
   arrModules = [
     {
+      key: "001",
       title: 'Fases de Pruebas',
       description: 'Definición de cada una de las fases.',
       bgc: `#3f51b5`,
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
       position:{ top: 300, left: 0 }
     },
     {
+      key: "002",
       title: 'Modulo 2',
       description: 'La descripcion del modulo 2',
       bgc: `#3f51b5`,
@@ -33,6 +35,7 @@ export class DashboardComponent implements OnInit {
       position:{ top: 150, left: 100 }
     },
     {
+      key: "003",
       title: 'Modulo 3',
       description: 'La descripcion del modulo 3',
       bgc: `#3f51b5`,
@@ -40,6 +43,7 @@ export class DashboardComponent implements OnInit {
       position:{ top: 80, left: 300 }
     },
     {
+      key: "004",
       title: 'Modulo 4',
       description: 'La descripcion del modulo 4',
       bgc: `#3f51b5`,
@@ -47,6 +51,7 @@ export class DashboardComponent implements OnInit {
       position:{ top: 80, right: 350 }
     },
     {
+      key: "005",
       title: 'Modulo 5',
       description: 'La descripcion del modulo 5',
       bgc: `#3f51b5`,
@@ -54,6 +59,7 @@ export class DashboardComponent implements OnInit {
       position:{ top: 150, right: 100 }
     },
     {
+      key: "006",
       title: 'Modulo 6',
       description: 'La descripcion del modulo 6',
       bgc: `#3f51b5`,

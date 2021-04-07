@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TAGS } from "../../app.constants";
 
@@ -11,9 +12,16 @@ export class DescriptionComponent implements OnInit {
   TAGS = TAGS;
   @Input('item') item: any;
 
-  constructor() { }
-
+  constructor(private router: Router) {
+    
+  }
+  
   ngOnInit(): void {
+    console.log('item =>', this.item);
+  }
+
+  redirectChapter(key: string){
+    this.router.navigate([`/chapter/${key}`]);
   }
 
 }

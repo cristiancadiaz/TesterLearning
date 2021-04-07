@@ -1,8 +1,12 @@
-.photoUser{
+.navbar .navbar-nav .nav-item .nav-link.profile-photo .profile-photo-small{
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    display: flex;
+    height: 40px;
+    width: 40px;
     &:hover{
         box-shadow: 6px 8px 23px 0px rgba(0,0,0,0.52);
     }
+}
+.dropdown-toggle::after{
+    display: none;
 }
