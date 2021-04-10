@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   onLogin(){
     this.auth.login(this.loginForm.value).then((res)=>{
       this.router.navigate(['/dashboard'])
-      this.collectionService.updateDocument(SERVICES.USERS, res.user.uid)
+      
       console.log("result 33333 =>", res);  
     })
   }

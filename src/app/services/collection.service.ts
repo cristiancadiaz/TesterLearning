@@ -21,9 +21,9 @@ export class CollectionService {
     return this.db.doc(`${name}/${id}`).valueChanges();
   }
 
-  updateDocument(nombreCollection: string, key: string){
+  updateDocument(nombreCollection: string, key: string, data: any){
     const userRef = this.db.collection(nombreCollection);
-    return userRef.doc(key).set({name: "Jose"});
+    return userRef.doc(key).set(data);
   }
 
   /* createDocument(nombreCollection: string, key: string){
