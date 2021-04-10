@@ -20,24 +20,24 @@ export class DashboardComponent implements OnInit {
   arrModules = [
     {
       key: "001",
-      title: 'Fases de Pruebas',
-      description: 'Definición de cada una de las fases.',
+      title: 'Módulo 1 - Fundamentos de Pruebas',
+      description: 'En este módulo se le introduce al profesional en en los conceptos básicos del Proceso de Pruebas de Software y se le enseña la importancia de las pruebas.',
       bgc: `#3f51b5`,
       progress: 60,
       position:{ top: 300, left: 0 }
     },
     {
       key: "002",
-      title: 'Modulo 2',
-      description: 'La descripcion del modulo 2',
+      title: 'Módulo 2 - Principios Generales de las Pruebas',
+      description: 'En este módulo se muestran cuales son los Principios Generales de las Pruebas y por que se deben cumplir cuando se realizan Pruebas de Software',
       bgc: `#3f51b5`,
       progress: 20,
       position:{ top: 150, left: 100 }
     },
     {
       key: "003",
-      title: 'Modulo 3',
-      description: 'La descripcion del modulo 3',
+      title: 'Módulo 3 - Ciclos de Vida',
+      description: 'En este módulo se aprende el ciclo de vida del desarrollo de Software y como este interactua con las pruebas de Software',
       bgc: `#3f51b5`,
       progress: 50,
       position:{ top: 80, left: 300 }

@@ -10,10 +10,10 @@ import { AuthService } from '../../../services/auth.service';
 export class SignupComponent implements OnInit {
 
   registerForm = new FormGroup({
-    displayName: new FormControl('Christian Diaz'),
-    photo: new FormControl('gyhi'),
-    email: new FormControl('cristian@gmail.com'),
-    password: new FormControl('123456')
+    displayName: new FormControl(''),
+    photo: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl('')
   })
   constructor(public auth: AuthService) { 
     
@@ -27,7 +27,6 @@ export class SignupComponent implements OnInit {
 
   onRegister(){
     this.auth.register(this.registerForm.value).then((res)=>{
-    
       
     })
     /* this.auth.register(this.registerForm.value).then(
