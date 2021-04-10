@@ -29,11 +29,12 @@ export class SignupComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.collectionService.getCollection(SERVICES.CHAPTERS).subscribe((resChapters)=>{
-      resChapters.forEach((chapterData: any) =>{
-        this.chapters.push({key: chapterData.payload.doc.id, progress : 0})
+    this.collectionService.getCollection(SERVICES.CHAPTERS).then((resChapters)=>{
+      resChapters.forEach((doc: any) =>{
+        this.chapters.push({key: doc.id, progress : 0})
       })
     })
+    
   }
 
   onRegister(){

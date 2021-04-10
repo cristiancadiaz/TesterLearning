@@ -24,9 +24,9 @@ export class ChapterComponent implements OnInit {
   ngOnInit(): void {
     this.idChapter = this.route.snapshot.paramMap.get('id');
 
-    this.collectionService.getCollection(`${SERVICES.CHAPTERS}/${this.idChapter}/${SERVICES.SECTIONS}`).subscribe((result)=>{
-      result.forEach((chapterData: any) =>{
-        this.sections.push({key: chapterData.payload.doc.id, ...chapterData.payload.doc.data()})
+    this.collectionService.getCollection(`${SERVICES.CHAPTERS}/${this.idChapter}/${SERVICES.SECTIONS}`).then((result)=>{
+      result.forEach((doc: any) =>{
+        this.sections.push({key: doc.id, ...doc.data()})
       })
       console.log('ngOnInit =>',this.sections);
     });

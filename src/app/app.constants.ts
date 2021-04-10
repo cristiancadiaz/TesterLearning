@@ -18,6 +18,9 @@ export const SERVICES = {
     SECTIONS : 'Sections'
 };
 export const ERR_AUTH =  [
+  { CODE: 'auth/too-many-requests', MESSAGE: 'Ha excedido su numero de intentos, intentelo mas tarde'},
+  { CODE: 'auth/user-not-found', MESSAGE: 'El usuario no se encuentra registrado'},
+  { CODE: 'auth/wrong-password', MESSAGE: 'La contraseña es invalida'},
   { CODE: 'auth/email-already-in-use', MESSAGE: 'El correo diligenciado ya existe en nuestra base de datos'}
 ]
 export const DNI_TYPES = [

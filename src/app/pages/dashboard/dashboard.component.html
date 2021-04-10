@@ -1,7 +1,7 @@
 <headerComponent></headerComponent>
-<div class="position-relative container" style="height: 100vh;">
+<div *ngIf="modules && modules.length > 0" class="position-relative container" style="height: 100vh;">
     <section class="position-relative">
-        <balloon-button (click)="moduleSelect(ballon)" *ngFor="let ballon of arrModules; index as i;" [index]=i+1 [styleObj]=ballon [activeItem]="ballon.key == itemSelected.key"></balloon-button>
+        <balloon-button (click)="moduleSelect(module)" *ngFor="let module of modules; index as i;" [index]=i+1 [styleObj]=module [activeItem]="module.key == itemSelected.key"></balloon-button>
     </section>
     <section class="wrapperDescription">
         <description [item]="itemSelected"></description>
