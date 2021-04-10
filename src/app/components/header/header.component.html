@@ -20,13 +20,15 @@
           </div>
         </div>
       </nav> -->
-      <nav class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
+      <nav class="navbar  fixed-top  navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display --> 
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-      
+          <div class="collapse navbar-collapse ">
+            <ul class="navbar-nav w-100 justify-content-between">
+              <li class="nav-item active">
+                <a *ngIf="$currentLocation !== '/dashboard' && $currentLocation !== '/'" class="nav-link" [routerLink]="['/dashboard']">Ir al dashboard</a>
+              </li>
               <li *ngIf="currentUser" class="dropdown nav-item">
                 <a href="javascript:;" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
                   <div *ngIf="currentUser" class="profile-photo-small">

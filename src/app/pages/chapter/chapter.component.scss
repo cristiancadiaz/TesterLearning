@@ -1,5 +1,8 @@
+@import "./../../../styles.scss";
 .wrapperModule{
-    margin: 2%;
+    margin: 5% auto;
+    max-width: none;
+    width: 100%;
     & .contentTitle{
         margin-left: 10px;
         display: flex;
@@ -17,6 +20,13 @@
             }
         }
     }
+    & .listContent{
+        & > li{
+            &.active{
+                font-weight: bold;
+            }
+        }
+    }
 }
 img{
     width: 100%;
@@ -25,5 +35,11 @@ img{
     position: relative;
     & > li{
         background-color: #000;
+    }
+}
+
+@media (min-width: 1400px) {
+    .wrapperModule{
+        max-width: 1400px;
     }
 }

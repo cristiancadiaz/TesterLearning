@@ -33,11 +33,7 @@ export class ChapterComponent implements OnInit {
   }
 
   handlerActionSection(index){
-    console.log('inmdex',index);
-    document.querySelector('.carousel-item').classList.remove('active');
     this.sectionActiveIndex = index;
-    var elementDots = document.getElementById(`dotsCarrousel_${index}`);
-    elementDots.click();
   }
   
 
