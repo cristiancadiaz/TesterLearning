@@ -80,6 +80,7 @@ export class HomeComponent implements OnInit {
     this.collection.getCollectionById(SERVICES.USERS,"l1wnSDlzWvDvBpEWdpdd").subscribe((result) =>{
       console.log('result =>', result);
       })
+
   }
 
 }

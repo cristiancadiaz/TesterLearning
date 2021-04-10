@@ -5,7 +5,13 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CollectionService {
 
-  constructor(public db: AngularFirestore) { }
+  
+  
+  constructor(public db: AngularFirestore) {
+    
+   }
+   
+   
 
   getCollection(route: string): Observable<any>  {
     return this.db.collection(route).snapshotChanges();
@@ -14,5 +20,14 @@ export class CollectionService {
   getCollectionById(name: string, id: string): Observable<any> {
     return this.db.doc(`${name}/${id}`).valueChanges();
   }
+
+  updateDocument(nombreCollection: string, key: string){
+    const userRef = this.db.collection(nombreCollection);
+    return userRef.doc(key).set({name: "Jose"});
+  }
+
+  /* createDocument(nombreCollection: string, key: string){
+    return this
+  } */
 }
 
