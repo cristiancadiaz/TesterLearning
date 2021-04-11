@@ -17,12 +17,7 @@
                     <div class="carousel-inner">
                       <div id="sliderCarrousel_{{i}}" class="carousel-item" *ngFor="let section of sections; index as i" [class.active]="sectionActiveIndex == i">
                             <section class="row">
-                                <div [ngClass]="section.col2 != '' ? 'col-md-9': 'col-md-12'">
-                                  <div class="description" [innerHTML]="section.col1"></div>
-                                </div>
-                                <div [ngClass]="section.col2 != '' ? 'col-md-3': ''">
-                                  <div class="description" [innerHTML]="section.col2"></div>
-                                </div>
+                              <div class="content" [innerHTML]="section.content"></div>
                             </section>
                       </div>
                     </div>

@@ -27,6 +27,19 @@
             }
         }
     }
+
+    & .carousel{
+        & > .carousel-inner{
+            & > .carousel-item{
+                & .content{
+                    & .row{
+                        margin-right: 0;
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
 }
 img{
     width: 100%;

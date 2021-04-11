@@ -17,7 +17,9 @@ export class HeaderComponent implements OnInit {
     this.currentUser = this.auth.currentUser;
    }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.$currentLocation = location.pathname;
+  }
   
   logout(){
     this.auth.logout().then(()=>{
