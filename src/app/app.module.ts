@@ -10,10 +10,9 @@ import { environment } from 'src/environments/environment';
 import { CollectionService } from './services/collection.service';
 import { AuthService } from './services/auth.service';
 import { UtilService } from './services/util.service';
-import { QuestionComponent } from './components/question/question.component';
 
 @NgModule({
-  declarations: [AppComponent, QuestionComponent],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule, 
     BrowserModule,

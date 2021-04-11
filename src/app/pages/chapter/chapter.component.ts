@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SERVICES } from '../../app.constants';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SERVICES,ROUTES } from '../../app.constants';
 import { Section } from '../../models/section.model';
 import { AuthService } from '../../services/auth.service';
 import { CollectionService } from '../../services/collection.service';
@@ -18,7 +18,7 @@ export class ChapterComponent implements OnInit {
   private progressPercentage: number = 100;
   private chapterProgress: any
 
-  constructor(private route: ActivatedRoute, private collectionService: CollectionService, private authService: AuthService) {
+  constructor(private route: ActivatedRoute, private collectionService: CollectionService, private authService: AuthService, private router: Router) {
     this.sections = new Array<Section>();
   }
 
@@ -47,6 +47,11 @@ export class ChapterComponent implements OnInit {
       if(res.exists)
         this.chapterProgress = res.data();
     })
+  }
+
+
+  goToActivity(){
+    this.router.navigate([`${ROUTES.CHAPTER}/${this.idChapter}${ROUTES.ACTIVITY}`])
   }
 
 }

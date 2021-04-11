@@ -1,6 +1,6 @@
 <headerComponent></headerComponent>
 <div class="wrapperModule">
-    <div class="contentTitle">
+    <div class="moduleTitle">
         <h1>Modulo 1</h1>
     </div>
     <div class="row mt-3">
@@ -9,15 +9,18 @@
                         <li id="dotsCarrousel_{{i}}" class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" [data-slide-to]="i" [class.active]="sectionActiveIndex == i" (click)="handlerActionSection(section, i)">
                             {{section.title}}
                         </li>
+                        <li (click)=" goToActivity()">
+                          Actividad
+                        </li>
                 </ul>
             </div>
-            <div class="col-md-9">
-                <h3>{{sections[sectionActiveIndex] ? sections[sectionActiveIndex].title : ''}}</h3>
+            <div class="col-md-9 contentDetail">
+                <h3 class="mainTitle">{{sections[sectionActiveIndex] ? sections[sectionActiveIndex].title : ''}}</h3>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner">
                       <div id="sliderCarrousel_{{i}}" class="carousel-item" *ngFor="let section of sections; index as i" [class.active]="sectionActiveIndex == i">
                             <section class="row">
-                              <div class="content" [innerHTML]="section.content"></div>
+                              <div [innerHTML]="section.content"></div>
                             </section>
                       </div>
                     </div>
