@@ -2,8 +2,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { CONFIG_ALERT, ERR_AUTH, TAGS } from '../../app.constants';
+import { UtilService } from '../../services/util.service';
 import { CollectionService } from 'src/app/services/collection.service';
-import { SERVICES } from 'src/app/app.constants';
 
 @Component({
   selector: 'login',
@@ -16,15 +17,20 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl('')
   })
-  constructor(private auth: AuthService, private router: Router, private collectionService: CollectionService) { }
+  constructor(private auth: AuthService, private collectionService: CollectionService, private router: Router, private utilService: UtilService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   
+  }
 
   onLogin(){
     this.auth.login(this.loginForm.value).then((res)=>{
       this.router.navigate(['/dashboard'])
-      this.collectionService.updateDocument(SERVICES.USERS, res.user.uid)
-      console.log("result 33333 =>", res);  
+    }).catch((err)=>{
+      for(const index in ERR_AUTH){
+        if(ERR_AUTH[index]['CODE'] == err.code)
+          this.utilService.openCustomAlert(TAGS.LABELS.ERROR,'error',CONFIG_ALERT.TIMERS.DEFAULT,'top-end',ERR_AUTH[index]['MESSAGE']);
+      }
     })
   }
 

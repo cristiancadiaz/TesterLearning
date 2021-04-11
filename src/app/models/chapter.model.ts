@@ -1,6 +1,7 @@
 export class Chapter {
-    key: string;
-    title : string;
-    description : string;
-    sections: []
+    key?: string;
+    title? : string;
+    description? : string;
+    progress? : number;
+    sections?: []
 }

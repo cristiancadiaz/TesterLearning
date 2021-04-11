@@ -13,15 +13,11 @@ export class HeaderComponent implements OnInit {
 
   $currentLocation: any;
 
-  constructor(private auth:AuthService, private router: Router) { }
+  constructor(public auth:AuthService, private router: Router) {
+    this.currentUser = this.auth.currentUser;
+   }
 
-  ngOnInit(): void {
-    this.$currentLocation = location.pathname;
-    this.auth.isAuth().subscribe((res)=>{
-      this.auth.setUser(res);
-      this.currentUser = this.auth.getUser();
-    })
-  }
+  ngOnInit(): void {}
   
   logout(){
     this.auth.logout().then(()=>{

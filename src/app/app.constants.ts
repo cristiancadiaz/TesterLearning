@@ -3,8 +3,12 @@ export const author = 'Juan Pablo Hernandez';
 export const version = 'Juan Pablo Hernandez';
 
 export const TAGS = {
-    EVENT: {},
+    EVENT: {
+      ERR:{}
+    },
     LABELS: {
+      ERROR: 'ERROR',
+      COMPLETE_REGISTER: 'REGISTRO COMPLETADO',
       BTN_MODULE: 'IR AL MODULO'
     }
 };
@@ -13,7 +17,12 @@ export const SERVICES = {
     CHAPTERS: 'Chapters',
     SECTIONS : 'Sections'
 };
-
+export const ERR_AUTH =  [
+  { CODE: 'auth/too-many-requests', MESSAGE: 'Ha excedido su numero de intentos, intentelo mas tarde'},
+  { CODE: 'auth/user-not-found', MESSAGE: 'El usuario no se encuentra registrado'},
+  { CODE: 'auth/wrong-password', MESSAGE: 'La contraseña es invalida'},
+  { CODE: 'auth/email-already-in-use', MESSAGE: 'El correo diligenciado ya existe en nuestra base de datos'}
+]
 export const DNI_TYPES = [
   { value: 'CC', name: 'Cedula de Ciudadania' },
   { value: 'TI', name: 'Tarjeta de Identidad' },
@@ -26,11 +35,11 @@ export const CONFIG_ALERT = {
     WARNING: 'warning',
     INFO: 'info',
   },
-  POSITION: {
-    TOP_END: 'top-end',
-    CENTER: 'center',
-    BTM: 'bottom',
-  },
+  TIMERS:{
+    FAST: 500,
+    DEFAULT: 1500,
+    SLOW: 2000
+  }
 };
 
 export const ASSETS = {

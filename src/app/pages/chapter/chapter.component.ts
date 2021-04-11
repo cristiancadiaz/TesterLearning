@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SERVICES } from 'src/app/app.constants';
-import { Section } from 'src/app/models/section.model';
+import { SERVICES } from '../../app.constants';
+import { Section } from '../../models/section.model';
+import { AuthService } from '../../services/auth.service';
 import { CollectionService } from '../../services/collection.service';
 
 @Component({
@@ -13,28 +14,39 @@ export class ChapterComponent implements OnInit {
 
   idChapter: string;
   public sections: Array<Section>;
-
   public sectionActiveIndex: number = 0;
-  
+  private progressPercentage: number = 100;
+  private chapterProgress: any
 
-  constructor(private route: ActivatedRoute, private collectionService: CollectionService) { 
+  constructor(private route: ActivatedRoute, private collectionService: CollectionService, private authService: AuthService) {
     this.sections = new Array<Section>();
   }
 
   ngOnInit(): void {
     this.idChapter = this.route.snapshot.paramMap.get('id');
-
-    this.collectionService.getCollection(`${SERVICES.CHAPTERS}/${this.idChapter}/${SERVICES.SECTIONS}`).subscribe((result)=>{
-      result.forEach((chapterData: any) =>{
-        this.sections.push({key: chapterData.payload.doc.id, ...chapterData.payload.doc.data()})
+    this.collectionService.getCollection(`${SERVICES.CHAPTERS}/${this.idChapter}/${SERVICES.SECTIONS}`).then((result)=>{
+      result.forEach((doc: any) =>{
+        this.sections.push({key: doc.id, ...doc.data()})
       })
-      console.log('ngOnInit =>',this.sections);
+      this.progressPercentage = this.progressPercentage / this.sections.length;
     });
+    this.getChaptersByUser();
   }
 
-  handlerActionSection(index){
+  handlerActionSection(section, index){
+    let localProgress = this.progressPercentage * (index+1);
+    this.chapterProgress.progress = this.chapterProgress.progress > localProgress ? this.chapterProgress.progress : localProgress;
     this.sectionActiveIndex = index;
+    if(this.chapterProgress.progress >= localProgress){
+      this.collectionService.updateDocument(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}/${this.idChapter}`,this.chapterProgress);
+    }
   }
-  
+
+  async getChaptersByUser(){
+    return await this.collectionService.getCollectionById(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}/${this.idChapter}`).then((res)=>{
+      if(res.exists)
+        this.chapterProgress = res.data();
+    })
+  }
 
 }
