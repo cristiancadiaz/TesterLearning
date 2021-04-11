@@ -12,7 +12,7 @@ import { CollectionService } from '../../services/collection.service';
 export class DashboardComponent implements OnInit {
 
  
-  private $currentUser: firebase.default.User;;
+  private userProgress: any;
   public itemSelected: any
 
   public modules: Array<Chapter>;
@@ -21,25 +21,28 @@ export class DashboardComponent implements OnInit {
 
   constructor(public collectionService: CollectionService, private authService:AuthService) {
     this.modules = new Array<Chapter>();
-    
-    this.collectionService.getCollection(SERVICES.CHAPTERS).then((resChapters)=>{
-      resChapters.forEach((doc) =>{
-        this.modules.push({key: doc.id, progress: 60, ...doc.data()})
-      })
-      this.itemSelected = this.modules[0];
-    })
-
-    
   }
   
   ngOnInit() {
-    this.authService.isAuth().subscribe((res)=>{
-      this.authService.setUser(res);
-      this.$currentUser = this.authService.getUser();
-    })
-    
+    this.handlerModulesRender();
   }
   moduleSelect(item: any){
     this.itemSelected = item;
+  }
+
+  async handlerModulesRender(){
+    await this.collectionService.getCollection(SERVICES.CHAPTERS).then((resChapters)=>{
+      resChapters.forEach(async (doc) =>{
+          await this.handlerUserProgressRender(doc.id).then((result)=>{
+            this.modules.push({key: doc.id, progress: result.progress, ...doc.data()})
+          });
+        })
+    })
+  }
+  async handlerUserProgressRender(idChapter:string){
+    return await this.collectionService.getCollectionById(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}/${idChapter}`,).then((result)=>{
+      if(result.exists)
+        return result.data();
+    })
   }
 }

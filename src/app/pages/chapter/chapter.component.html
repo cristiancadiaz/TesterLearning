@@ -6,7 +6,7 @@
     <div class="row mt-3">
             <div class="col-md-3">
                 <ul class="listContent">
-                        <li id="dotsCarrousel_{{i}}" class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" [data-slide-to]="i" [class.active]="sectionActiveIndex == i" (click)="handlerActionSection(i)">
+                        <li id="dotsCarrousel_{{i}}" class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" [data-slide-to]="i" [class.active]="sectionActiveIndex == i" (click)="handlerActionSection(section, i)">
                             {{section.title}}
                         </li>
                 </ul>
@@ -27,7 +27,7 @@
                       </div>
                     </div>
                     <ol class="carousel-indicators">
-                        <li id="dotsCarrousel_{{i}}"class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" [data-slide-to]="i" [class.active]="sectionActiveIndex == i" (click)="handlerActionSection(i)"></li>
+                        <li id="dotsCarrousel_{{i}}"class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" [data-slide-to]="i" [class.active]="sectionActiveIndex == i" (click)="handlerActionSection(section, i)"></li>
                     </ol>
                   </div>
             </div>

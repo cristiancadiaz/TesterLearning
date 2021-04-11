@@ -2,19 +2,20 @@ import { Injectable } from '@angular/core';
 import { first, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../models/user.model';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
   public userData$: Observable<firebase.default.User>
-  private currentUser: any;
-
+  public currentUser: any;
   
   constructor(public afAuth: AngularFireAuth) {
     this.userData$ = afAuth.authState;
-  }
+    this.isAuth().subscribe((res)=>{
+        this.setUser(res);
+      })
+    }
 
   login(user: User): Promise<any>{
     return new Promise((resolve, reject) => {
@@ -36,9 +37,7 @@ export class AuthService {
   isAuth(){
     return this.afAuth.authState.pipe(map(auth=>auth))
   }
-  getUser(){
-    return this.currentUser;
-  }
+
   setUser(user: any){
     this.currentUser = user;
   }

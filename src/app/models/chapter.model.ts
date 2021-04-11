@@ -1,5 +1,5 @@
 export class Chapter {
-    key: string;
+    key?: string;
     title? : string;
     description? : string;
     progress? : number;

@@ -31,17 +31,18 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.collectionService.getCollection(SERVICES.CHAPTERS).then((resChapters)=>{
       resChapters.forEach((doc: any) =>{
-        this.chapters.push({key: doc.id, progress : 0})
+        this.chapters.push({key: doc.id})
       })
     })
-    
   }
 
   onRegister(){
     this.auth.register(this.registerForm.value).then(()=>{
       this.utilService.openCustomAlert(TAGS.LABELS.COMPLETE_REGISTER,'success',CONFIG_ALERT.TIMERS.DEFAULT,'top-end');
       this.auth.login(this.registerForm.value).then((res)=>{
-        this.collectionService.updateDocument(SERVICES.USERS, res.user.uid, {chapters: this.chapters})
+        this.chapters.forEach((item)=>{
+          this.collectionService.updateDocument(`${SERVICES.USERS}/${res.user.uid}/${SERVICES.CHAPTERS}/${item.key}`, {progress: 0})
+        })
         this.router.navigate(['/dashboard'])
       })
     }).catch((err)=>{
