@@ -3,7 +3,7 @@
     margin: 5% auto;
     max-width: none;
     width: 100%;
-    & .contentTitle{
+    & .moduleTitle{
         margin-left: 10px;
         display: flex;
         justify-content: flex-start;
@@ -12,12 +12,10 @@
         }
     }
     & .contentDetail{
-        margin-left: 10px;
-        display: flex;
-        & .contentSubTitle{
-            & >h2{
-                font-size: 2rem;
-            }
+        & .mainTitle{
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin: 5px 0;
         }
     }
     & .listContent{
@@ -31,12 +29,7 @@
     & .carousel{
         & > .carousel-inner{
             & > .carousel-item{
-                & .content{
-                    & .row{
-                        margin-right: 0;
-                        margin-left: 0;
-                    }
-                }
+
             }
         }
     }
