@@ -13,15 +13,11 @@ export class QuestionComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log('question', this.qst);
-    console.log('question', this.result);
-    
-  }
-  onItemChange(id: string,$event){
+  ngOnInit(): void {}
+  onItemChange(key: string,$event){
     this.result = {
-      id,
-      value: $event
+      key,
+      answer: [$event]
     }
     this.handlerResult.emit(this.result)
     

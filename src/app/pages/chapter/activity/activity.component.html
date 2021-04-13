@@ -5,10 +5,10 @@
     </div>
     <div class="content">
         <ul class="activitiesList">
-            <form >
+            <form action="">
                 <question *ngFor="let activity of arrActivities" [qst]=activity (handlerResult)="getResult($event)"></question>
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary btn-round">CALIFICAR</button>
+                    <button type="button" class="btn btn-primary btn-round" (click)="qualifyActivity()">CALIFICAR</button>
                 </div>
             </form>
         </ul>

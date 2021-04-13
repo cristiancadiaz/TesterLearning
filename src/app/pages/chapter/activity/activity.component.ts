@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CONFIG_ALERT } from 'src/app/app.constants';
 import { Question } from '../../../models/question.model';
 import { UtilService } from '../../../services/util.service';
 
@@ -9,8 +10,9 @@ import { UtilService } from '../../../services/util.service';
 })
 export class ActivityComponent implements OnInit {
 
-  constructor(private utilService:UtilService) { }
-
+  qualifyValue: number;
+  resultValue: number = 0;
+  userAnswer:  Array<Question> = new Array<Question>();
   arrActivities: Array<Question> = [
     {
       key: 'A001',
@@ -95,14 +97,62 @@ export class ActivityComponent implements OnInit {
         }
       ],
       answer: ['d']
+    },
+    {
+      key: 'A004',
+      type: 'only-answer',
+      title: '¿Sistema para la transmisión y recepción de imágenes y sonidos a distancia que simulan movimientos, que emplea un mecanismo de difusión.?',
+      content: [
+        {
+          id:'A001_answer04',
+          value:'a',
+          label:'a. Error Humano'
+        },
+        {
+          id:'A001_answer04',
+          value:'b',
+          label:'b. Acción Humana'
+        },
+        {
+          id:'A001_answer04',
+          value:'c',
+          label:'c. Un choque hormonal '
+        },
+        {
+          id:'A001_answer04',
+          value:'d',
+          label:'d. Un Televisor'
+        }
+      ],
+      answer: ['d']
     }
   ]
 
-  ngOnInit(): void {
+  constructor(private utilService:UtilService) {
+    this.qualifyValue = 100 / this.arrActivities.length;
   }
 
-  getResult($event){
-    console.log('event',$event);
+  ngOnInit(): void {
+    this.arrActivities.forEach((item: Question)=>{
+      this.userAnswer.push({
+        key: item.key,
+        answer: []
+      })
+    })
+  }
+
+  getResult($event: Question){
+    this.userAnswer.forEach((item: Question)=>{
+      if(item.key == $event.key)
+        item.answer = $event.answer
+    })
+  }
+  qualifyActivity(){
+    for (const index in this.arrActivities) {
+      if(this.arrActivities[index].type == 'only-answer')
+        this.arrActivities[index].answer[0] == this.userAnswer[index].answer[0] ? this.resultValue += this.qualifyValue : ''
+    }
+    this.utilService.openCustomAlert(`RESULTADO`,'info',CONFIG_ALERT.TIMERS.DEFAULT,'center',`Tu calificación es ${this.resultValue}`,false)
   }
 
 }

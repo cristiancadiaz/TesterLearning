@@ -1,10 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./variables.scss";
 
-h1, h2, h3 ,.h1, .h2, .h3{
+h1, h2, h3 ,.h1, .h2, .h3, h4, .h4{
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+    color: #000;
 }
+h4, .h4{
+    font-weight: 500 !important;
+}
+
 
 .bgPrimary.navbar-expand-lg {
     background-color: $primary;
