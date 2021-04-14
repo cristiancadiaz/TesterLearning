@@ -1,0 +1,19 @@
+.wrapperActivity{
+    margin: 5% auto;
+    max-width: none;
+    width: 100%;
+    & .mainTitle{
+        margin-left: 10px;
+        display: flex;
+        justify-content: flex-start;
+        & h1{
+            font-size: 3rem;
+        }
+    }
+    @media (min-width: 1400px) {
+        & {
+            max-width: 1400px;
+        }
+    }
+    
+}

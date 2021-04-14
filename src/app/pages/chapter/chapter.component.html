@@ -9,6 +9,9 @@
                         <li id="dotsCarrousel_{{i}}" class="dots-carrousel" data-target="#carouselExampleIndicators" *ngFor="let section of sections; index as i" [data-slide-to]="i" [class.active]="sectionActiveIndex == i" (click)="handlerActionSection(section, i)">
                             {{section.title}}
                         </li>
+                        <li (click)=" goToActivity()">
+                          Actividad
+                        </li>
                 </ul>
             </div>
             <div class="col-md-9 contentDetail">

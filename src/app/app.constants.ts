@@ -15,7 +15,14 @@ export const TAGS = {
 export const SERVICES = {
     USERS : 'Users',
     CHAPTERS: 'Chapters',
-    SECTIONS : 'Sections'
+    SECTIONS : 'Sections',
+    ACTIVITIES : 'Activities'
+};
+export const ROUTES = {
+    DASHBOARD : '/dashboard',
+    CHAPTER: '/chapter',
+    SECTION : '/section',
+    ACTIVITY : '/activity'
 };
 export const ERR_AUTH =  [
   { CODE: 'auth/too-many-requests', MESSAGE: 'Ha excedido su numero de intentos, intentelo mas tarde'},
