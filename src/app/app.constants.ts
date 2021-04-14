@@ -9,7 +9,12 @@ export const TAGS = {
     LABELS: {
       ERROR: 'ERROR',
       COMPLETE_REGISTER: 'REGISTRO COMPLETADO',
-      BTN_MODULE: 'IR AL MODULO'
+      BTN_MODULE: 'IR AL MODULO',
+      ARE_YOU_SURE: '¿Estás segur@?',
+      CONFIRM_ACTIVITY: 'Lee atentamente cada una de las preguntas antes de enviar tus respuestas',
+      YES: 'SI',
+      NOT: 'NO',
+      RESULT: 'Resultado'
     }
 };
 export const SERVICES = {
