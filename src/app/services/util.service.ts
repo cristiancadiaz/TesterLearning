@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import Swal, { SweetAlertIcon, SweetAlertPosition } from 'sweetalert2'
+import Swal, { SweetAlertIcon, SweetAlertPosition, SweetAlertResult } from 'sweetalert2'
 
 
 @Injectable()
@@ -19,10 +19,30 @@ export class UtilService {
       })
   }
 
+  openModal( title : string, icon?: SweetAlertIcon, confirmButtonText?: string, cancelButtonText?: string,  text?: string): Promise<SweetAlertResult>{
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    return swalWithBootstrapButtons.fire({
+      title,
+      text,
+      icon,
+      showCancelButton: true,
+      confirmButtonText,
+      cancelButtonText,
+      reverseButtons: false
+    })
+    
+  }
+
   transformStringToHtml(v:string):SafeHtml {
     return this._sanitizer.bypassSecurityTrustHtml(v);
   }
-
 
 }
 

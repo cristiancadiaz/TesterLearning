@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CollectionService {
 
-  
-  
   constructor(public db: AngularFirestore) {}
 
   async getCollection (route: string): Promise<any>  {
@@ -20,7 +18,9 @@ export class CollectionService {
   async updateDocument(route: string, data: any) :Promise<any>  {
     return await this.db.doc(route).set(data);
   }
-
+  async addDocument(route: string, data: any) :Promise<any>  {
+    return await this.db.collection(route).add(data)
+  }
   /* updateDocument(route: string, data: any){
     return this.db.doc(route).set(data);
   } */

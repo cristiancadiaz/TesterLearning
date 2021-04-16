@@ -4,13 +4,15 @@
         <h1>Actividad</h1>
     </div>
     <div class="content">
-        <ul class="activitiesList">
+        <ul *ngIf="questions && questions.length > 0" class="activitiesList">
             <form action="">
-                <question *ngFor="let activity of arrActivities" [qst]=activity (handlerResult)="getResult($event)"></question>
+                <question *ngFor="let activity of questions" [qst]=activity (handlerResult)="getResult($event)"></question>
                 <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary btn-round" (click)="qualifyActivity()">CALIFICAR</button>
+                    <button *ngIf="!obtainedResult" type="button" class="btn btn-primary btn-round" (click)="qualifyActivity()">CALIFICAR</button>
                 </div>
             </form>
         </ul>
+        <h3 *ngIf="obtainedResult" class="obtainedResult text-center">Tu calificación es de <b [ngClass]="{'text-success': obtainedResult >= 50, 'text-danger': obtainedResult < 50}">{{obtainedResult}}/100</b></h3>
     </div>
 </div>
+

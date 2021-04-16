@@ -21,24 +21,27 @@
         </div>
       </nav> -->
       <nav class="navbar  fixed-top  navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display --> 
-          <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="container-fluid">
           <div class="collapse navbar-collapse ">
-            <ul class="navbar-nav w-100 justify-content-between">
-              <li class="nav-item active">
-                <a *ngIf="$currentLocation !== '/dashboard' && $currentLocation !== '/'" class="nav-link" [routerLink]="['/dashboard']">Ir al dashboard</a>
+            <ul  class="navbar-nav  mr-auto">
+              <li *ngIf="$currentLocation !== '/dashboard' && $currentLocation !== '/'" class="nav-item">
+                <button class="nav-link" (click)="goBack()" class="btn btn-primary btn-round">
+                  <i class="icon-center material-icons">arrow_back_ios</i>
+                  Volver
+                </button>
               </li>
+            </ul>
+            <ul class="nav justify-content-end">
+              <h6 class="d-flex align-items-center">Hola {{currentUser.displayName}}</h6>
               <li *ngIf="currentUser" class="dropdown nav-item">
                 <a href="javascript:;" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
                   <div *ngIf="currentUser" class="profile-photo-small">
                     <img  class="rounded-circle img-fluid" [src]="currentUser.photoURL" alt="">
                   </div>
-                <div class="ripple-container"></div></a>
+                </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <h6 class="dropdown-header">Hola {{currentUser.displayName}}</h6>
                   <a href="javascript:;" class="dropdown-item">Perfil</a>
-                  <a href="javascript:;" class="dropdown-item">Resultados</a>
+                  <a [routerLink]="['/dashboard']" class="dropdown-item">Dashboard</a>
                   <a href="javascript:;" class="dropdown-item" (click)="logout()">Cerrar Sesión</a>
                 </div>
               </li>
