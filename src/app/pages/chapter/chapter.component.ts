@@ -51,7 +51,7 @@ export class ChapterComponent implements OnInit {
 
 
   goToActivity(){
-    this.router.navigate([`${ROUTES.CHAPTER}/${this.idChapter}${ROUTES.ACTIVITY}`])
+    this.router.navigate([`${ROUTES.CHAPTER}/${this.idChapter}${ROUTES.ACTIVITY}/ACT001`])
   }
 
 }

@@ -3,7 +3,7 @@
     <div *ngIf="qst.type=='only-answer'" class="listOptions">
         <div class="form-check form-check-radio" *ngFor="let item of qst.content">
             <label class="form-check-label">
-                <input class="form-check-input" type="radio" [name]="item.name" (change)="onItemChange(qst.key,$event.target.value)" [id]="qst.key" [value]="item.value" >
+                <input class="form-check-input" type="radio" [name]="qst.name" (change)="onItemChange(qst.key,$event.target.value)" [id]="qst.key" [value]="item.value" >
                 {{item.label}}
                 <span class="circle">
                     <span class="check"></span>
