@@ -4,8 +4,9 @@ import { ActivityComponent } from './activity/activity.component';
 import { ChapterComponent } from './chapter.component';
 
 const routes: Routes = [
-  { path: ':id', component: ChapterComponent },
-  { path: ':id/activity/:key', component: ActivityComponent }
+  { path: 'chapter/:id', component: ChapterComponent },
+  { path: 'chapter/:id/activity/:key', component: ActivityComponent },
+  { path: 'exam/:id', component: ActivityComponent }
 
 ];
 

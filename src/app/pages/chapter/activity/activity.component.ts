@@ -14,28 +14,31 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./activity.component.scss']
 })
 export class ActivityComponent implements OnInit {
-  idChapter: string;
-  idActivity: string;
+  idRoute: string;
+  idKey: string;
   qualifyValue: number;
   obtainedResult: number = 0;
+  showResult:boolean = false;
   userAnswer:  Array<Question> = new Array<Question>();
-  
-
-  questions: Array<Question> = []
+  questions: Array<Question> = [];
+  assignRoute: string = '';
+  isActivity: boolean;
 
   constructor(private route: ActivatedRoute, private utilService:UtilService, private collectionService: CollectionService, private authService: AuthService) {
-    this.idChapter = this.route.snapshot.paramMap.get('id');
-    this.idActivity = this.route.snapshot.paramMap.get('key');
+    this.isActivity = location.pathname.indexOf('chapter') > 0;
+    this.idRoute = this.route.snapshot.paramMap.get('id');
+    this.idKey = this.route.snapshot.paramMap.get('key');
   }
 
   ngOnInit(): void {
-    /* var questions: any = (valueJson as any).default;
-    this.collectionService.updateDocument('Chapters/A001/Activities/ACT001',{
+  /*   var questions: any = (valueJson as any).default;
+    this.collectionService.updateDocument('Exams/EX001',{
       questions
     }).then((result)=>{
       console.log('result0', result);
     }) */
-    this.collectionService.getCollectionById(`${SERVICES.CHAPTERS}/${this.idChapter}/${SERVICES.ACTIVITIES}/${this.idActivity}`).then((res)=>{
+    this.assignRoute = this.isActivity ? `${SERVICES.CHAPTERS}/${this.idRoute}/${SERVICES.ACTIVITIES}/${this.idKey}` : `${SERVICES.EXAMS}/EX001`;
+    this.collectionService.getCollectionById(this.assignRoute).then((res)=>{
       if(res.exists)
         this.questions.push(...res.data().questions)
       this.generateValueAnswerUser();
@@ -80,7 +83,7 @@ export class ActivityComponent implements OnInit {
         if(result.isConfirmed){
           for (const index in this.questions) {
             if(this.questions[index].type == 'only-answer')
-              this.questions[index].answer[0] == this.userAnswer[index].answer[0] ? this.obtainedResult += this.qualifyValue : ''
+              this.questions[index].answer == this.userAnswer[index].answer ? this.obtainedResult += this.qualifyValue : ''
             if(this.questions[index].type == 'autocomplete'){
               for (const n in this.userAnswer[index].answer) {
                 this.questions[index].answer.find((item)=>{
@@ -106,9 +109,10 @@ export class ActivityComponent implements OnInit {
     return parseInt(assign) + 1;
   }
   sendResult(){
+    this.showResult = !this.showResult;
     var send;
     this.collectionService.modules.forEach((module)=>{
-      if(module.key == this.idChapter){
+      if(module.key == this.idRoute){
         send = {
           activity: {
             answer: this.userAnswer,
@@ -116,9 +120,11 @@ export class ActivityComponent implements OnInit {
           },
           progress: module.progress
         }
-        this.collectionService.updateDocument(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}/${this.idChapter}`,send).catch((err)=>{console.log('eerr',err);})
       }
     })
+    if(!this.isActivity)
+      send = {answer: this.userAnswer,total: parseInt(this.obtainedResult.toString()).toFixed()}
+    this.collectionService.updateDocument(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${this.isActivity ? SERVICES.CHAPTERS : SERVICES.EXAMS}/${this.idRoute}`,send).catch((err)=>{console.log('eerr',err);})
 
   }
   generateValueAnswerUser(){

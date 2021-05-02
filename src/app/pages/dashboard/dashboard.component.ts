@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
         resChapters.forEach(async (doc) =>{
             await this.handlerUserProgressRender(doc.id).then((result)=>{
               this.collectionService.modules.push({key: doc.id, progress: result.progress, ...doc.data()})
-              console.log('result',this.collectionService.modules);
             });
           })
       })
