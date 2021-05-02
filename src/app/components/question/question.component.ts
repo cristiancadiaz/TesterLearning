@@ -21,7 +21,7 @@ export class QuestionComponent implements OnInit {
         this.result = {
           type: qst.type,
           key: qst.key,
-          answer: [$event]
+          answer: $event
         }
         break;
       case 'autocomplete':

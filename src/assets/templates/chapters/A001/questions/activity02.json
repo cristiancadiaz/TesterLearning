@@ -3,11 +3,11 @@
         "key": "QST1",
         "type": "only-answer",
         "title": "¿Cual es la deficion de error ?",
-        "name": "QST1_answer",
+        "name": "   ",
         "content": [
             {
                 "value": "a",
-                "label": "a. Error Humano"
+                "label": "      "
             },
             {
                 "value": "b",

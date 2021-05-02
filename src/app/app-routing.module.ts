@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'chapter',
+    path: '',
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/chapter/chapter.module').then(m => m.ChapterModule)
   },

@@ -22,7 +22,7 @@
                 "label": "d. Un Televisor"
             }
         ],
-        "answer": ["b"]
+        "answer": "b"
     },
     {
         "key": "QST2",
@@ -47,6 +47,6 @@
                 "label": "d. Un Televisor"
             }
         ],
-        "answer": ["c"]
+        "answer": "c"
     }
 ]
