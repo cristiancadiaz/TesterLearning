@@ -25,19 +25,24 @@ export class DashboardComponent implements OnInit {
   
   ngOnInit() {
     this.handlerModulesRender();
+    
   }
   moduleSelect(item: any){
     this.itemSelected = item;
   }
 
   async handlerModulesRender(){
-    await this.collectionService.getCollection(SERVICES.CHAPTERS).then((resChapters)=>{
-      resChapters.forEach(async (doc) =>{
-          await this.handlerUserProgressRender(doc.id).then((result)=>{
-            this.modules.push({key: doc.id, progress: result.progress, ...doc.data()})
-          });
-        })
-    })
+    if(this.collectionService.modules.length == 0){
+      await this.collectionService.getCollection(SERVICES.CHAPTERS).then((resChapters)=>{
+        resChapters.forEach(async (doc) =>{
+            await this.handlerUserProgressRender(doc.id).then((result)=>{
+              this.collectionService.modules.push({key: doc.id, progress: result.progress, ...doc.data()})
+              console.log('result',this.collectionService.modules);
+            });
+          })
+      })
+    }
+ 
   }
   async handlerUserProgressRender(idChapter:string){
     return await this.collectionService.getCollectionById(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}/${idChapter}`,).then((result)=>{

@@ -1,3 +1,11 @@
 .listOptions{
     margin: 10px 40px;
 }
+.autocomplete{
+    & label.content {
+        & input[type=text]{
+            width: auto;
+            text-align: center;
+        }
+    }
+}

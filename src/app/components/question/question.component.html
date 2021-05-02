@@ -1,14 +1,21 @@
 <div class="form-group" >
     <h3>{{qst.title}}</h3>
-    <div *ngIf="qst.type=='only-answer'" class="listOptions">
+    <section *ngIf="qst.type=='only-answer'" class="listOptions">
+        <p>(Selecione una respuesta)</p>
         <div class="form-check form-check-radio" *ngFor="let item of qst.content">
             <label class="form-check-label">
-                <input class="form-check-input" type="radio" [name]="qst.name" (change)="onItemChange(qst.key,$event.target.value)" [id]="qst.key" [value]="item.value" >
+                <input class="form-check-input" type="radio" [name]="qst.name" (change)="onItemChange(qst,$event.target.value)" [id]="qst.key" [value]="item.value" >
                 {{item.label}}
                 <span class="circle">
                     <span class="check"></span>
                 </span>
             </label>
         </div>
-    </div>
+    </section>
+    <section class="autocomplete" *ngIf="qst.type=='autocomplete'">
+        <label class="content" *ngFor="let item of qst.content">
+            <input *ngIf="item.type=='input'" class="form-control" type="text" [name]="item.name" (change)="onItemChange(qst,$event)" [id]="item.name" >
+            <p *ngIf="item.type=='text'">{{item.label}}</p>
+        </label>
+    </section>
 </div>

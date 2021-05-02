@@ -1,7 +1,7 @@
 <headerComponent></headerComponent>
-<div *ngIf="modules && modules.length > 0" class="position-relative container" style="height: 100vh;">
+<div *ngIf="this.collectionService.modules && this.collectionService.modules.length > 0" class="position-relative container" style="height: 100vh;">
     <section class="position-relative">
-        <balloon-button (click)="moduleSelect(module)" *ngFor="let module of modules; index as i;" [index]=i+1 [styleObj]=module [activeItem]="itemSelected && module.key == itemSelected.key"></balloon-button>
+        <balloon-button (click)="moduleSelect(module)" *ngFor="let module of this.collectionService.modules; index as i;" [index]=i+1 [styleObj]=module [activeItem]="itemSelected && module.key == itemSelected.key"></balloon-button>
     </section>
     <section *ngIf="itemSelected" class="wrapperDescription">
         <description [item]="itemSelected"></description>
