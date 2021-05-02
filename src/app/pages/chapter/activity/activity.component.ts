@@ -5,6 +5,7 @@ import { Question } from '../../../models/question.model';
 import { UtilService } from '../../../services/util.service';
 import * as valueJson from '../../../../assets/templates/chapters/A001/questions/activity01.json';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ActivityComponent implements OnInit {
 
   questions: Array<Question> = []
 
-  constructor(private route: ActivatedRoute,private utilService:UtilService, private collectionService: CollectionService) {
+  constructor(private route: ActivatedRoute, private utilService:UtilService, private collectionService: CollectionService, private authService: AuthService) {
     this.idChapter = this.route.snapshot.paramMap.get('id');
     this.idActivity = this.route.snapshot.paramMap.get('key');
   }
@@ -41,10 +42,33 @@ export class ActivityComponent implements OnInit {
     });
   }
 
-  getResult($event: Question){
+  getResult($event: any){
     this.userAnswer.forEach((item: Question)=>{
-      if(item.key == $event.key)
-        item.answer = $event.answer
+      if(item.key == $event.key){
+        switch ($event.type) {
+          case 'only-answer':
+              item.answer = $event.answer
+            break;
+          case 'autocomplete':
+            var exist = item.answer.find((result)=>{
+              if($event.answer.name == result.name){
+                result.value = $event.answer.value
+                return result
+              }
+            })
+            if(!exist)
+              item.answer.push($event.answer);
+            item.answer.sort((a,b)=>{
+              if (a.name > b.name) 
+                return 1;
+              if (a.name < b.name) 
+                return -1;
+            })
+            break;
+          default:
+            break;
+        }
+      }
     })
   }
   qualifyActivity(){
@@ -57,7 +81,16 @@ export class ActivityComponent implements OnInit {
           for (const index in this.questions) {
             if(this.questions[index].type == 'only-answer')
               this.questions[index].answer[0] == this.userAnswer[index].answer[0] ? this.obtainedResult += this.qualifyValue : ''
+            if(this.questions[index].type == 'autocomplete'){
+              for (const n in this.userAnswer[index].answer) {
+                this.questions[index].answer.find((item)=>{
+                  if(item.name ==  this.userAnswer[index].answer[n].name)
+                    item.value == this.userAnswer[index].answer[n].value ? this.obtainedResult += this.qualifyValue/this.questions[index].answer.length : ''
+                })
+              }
+            }
           }
+          this.sendResult();
         }
       })
     }
@@ -72,7 +105,22 @@ export class ActivityComponent implements OnInit {
     }
     return parseInt(assign) + 1;
   }
+  sendResult(){
+    var send;
+    this.collectionService.modules.forEach((module)=>{
+      if(module.key == this.idChapter){
+        send = {
+          activity: {
+            answer: this.userAnswer,
+            total: parseInt(this.obtainedResult.toString()).toFixed(),
+          },
+          progress: module.progress
+        }
+        this.collectionService.updateDocument(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}/${this.idChapter}`,send).catch((err)=>{console.log('eerr',err);})
+      }
+    })
 
+  }
   generateValueAnswerUser(){
     this.qualifyValue = 100 / this.questions.length;
     this.questions.forEach((item: Question)=>{

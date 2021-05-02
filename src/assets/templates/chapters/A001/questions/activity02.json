@@ -1,0 +1,81 @@
+[
+    {
+        "key": "QST1",
+        "type": "only-answer",
+        "title": "¿Cual es la deficion de error ?",
+        "name": "QST1_answer",
+        "content": [
+            {
+                "value": "a",
+                "label": "a. Error Humano"
+            },
+            {
+                "value": "b",
+                "label": "b. Acción Humana"
+            },
+            {
+                "value": "c",
+                "label": "c. Un choque hormonal"
+            },
+            {
+                "value": "d",
+                "label": "d. Un Televisor"
+            }
+        ],
+        "answer": ["b"]
+    },
+    {
+        "key": "QST2",
+        "type": "only-answer",
+        "title": "¿Palabra que se utilizan para definir al ser humano del sexo femenino, cuya anatomía genital se define por poseer senos, vagina, vulva, útero, ovarios y trompas de Falopio, su opuesto es el hombre (varón)?",
+        "name": "QST2_answer",
+        "content": [
+            {
+                "value": "a",
+                "label": "a. Error Humano"
+            },
+            {
+                "value": "b",
+                "label": "b. Acción Humana"
+            },
+            {
+                "value": "c",
+                "label": "c. Un choque hormonal"
+            },
+            {
+                "value": "d",
+                "label": "d. Un Televisor"
+            }
+        ],
+        "answer": ["c"]
+    },
+    {
+        "key": "QST3",
+        "title": "Diligencie los campos",
+        "type": "autocomplete",
+        "answer": [
+            {
+                "name": "a",
+                "value": "hola"
+            },
+            {
+                "name": "b",
+                "value": "como"
+            }
+        ],
+        "content": [
+            {
+                "name": "a",
+                "type": "input"
+            },
+            {
+                "label": "es uno de los estados de la materia",
+                "type": "text"
+            },
+            {
+                "name": "b",
+                "type": "input"
+            }
+        ]
+    }
+]

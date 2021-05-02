@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Chapter } from '../models/chapter.model';
 
 @Injectable()
 export class CollectionService {
 
+  public modules: Array<Chapter> = new Array<Chapter>();
+  
   constructor(public db: AngularFirestore) {}
 
   async getCollection (route: string): Promise<any>  {
