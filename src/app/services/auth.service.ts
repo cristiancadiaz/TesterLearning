@@ -3,12 +3,14 @@ import { first, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
+import { Chapter } from '../models/chapter.model';
 
 @Injectable()
 export class AuthService {
 
   public userData$: Observable<firebase.default.User>
   public currentUser: any;
+  public modules: Array<Chapter> = new Array<Chapter>();
   
   constructor(public afAuth: AngularFireAuth) {
     this.userData$ = afAuth.authState;

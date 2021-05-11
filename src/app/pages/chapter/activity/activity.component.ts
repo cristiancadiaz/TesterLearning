@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CONFIG_ALERT, SERVICES, TAGS } from '../../../app.constants';
 import { CollectionService } from '../../../services/collection.service';
 import { Question } from '../../../models/question.model';
 import { UtilService } from '../../../services/util.service';
-import * as valueJson from '../../../../assets/templates/chapters/A001/questions/activity01.json';
+import * as valueJson from '../../../../assets/templates/chapters/A001/questions/activity02.json';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
@@ -24,6 +24,8 @@ export class ActivityComponent implements OnInit {
   assignRoute: string = '';
   isActivity: boolean;
 
+  @Input('chapter') resultUser: any;
+
   constructor(private route: ActivatedRoute, private utilService:UtilService, private collectionService: CollectionService, private authService: AuthService) {
     this.isActivity = location.pathname.indexOf('chapter') > 0;
     this.idRoute = this.route.snapshot.paramMap.get('id');
@@ -31,17 +33,41 @@ export class ActivityComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  /*   var questions: any = (valueJson as any).default;
-    this.collectionService.updateDocument('Exams/EX001',{
+    !this.resultUser && this.getQuestions()
+
+  }
+  ngOnChanges(){
+    if(this.resultUser){
+      this.userAnswer = [];
+      this.questions = [];
+      this.idRoute = this.resultUser.activity.module;
+      this.idKey = this.resultUser.activity.idActivity;
+      this.isActivity = true;
+      this.userAnswer.push(...this.resultUser.activity.answer);
+      this.getQuestions();
+    }
+  
+  }
+
+  getQuestions(){
+     /*  var questions: any = (valueJson as any).default;
+    this.collectionService.updateDocument('/Chapters/A001/Activities/ACT001',{
       questions
     }).then((result)=>{
       console.log('result0', result);
     }) */
     this.assignRoute = this.isActivity ? `${SERVICES.CHAPTERS}/${this.idRoute}/${SERVICES.ACTIVITIES}/${this.idKey}` : `${SERVICES.EXAMS}/EX001`;
     this.collectionService.getCollectionById(this.assignRoute).then((res)=>{
-      if(res.exists)
-        this.questions.push(...res.data().questions)
-      this.generateValueAnswerUser();
+      if(res.exists){
+        if(this.resultUser){
+          res.data().questions.forEach((item,index)=>{
+            this.questions.push({answerUser: this.userAnswer[index].answer ? this.userAnswer[index].answer : this.userAnswer[index],...item})
+          })
+        }else{
+          this.questions.push(...res.data().questions)
+        }
+      }
+      !this.resultUser && this.generateValueAnswerUser();
     });
   }
 
@@ -73,6 +99,7 @@ export class ActivityComponent implements OnInit {
         }
       }
     })
+    
   }
   qualifyActivity(){
     var qstWithRespond = this.validateAnswerToActivity();
@@ -115,6 +142,8 @@ export class ActivityComponent implements OnInit {
       if(module.key == this.idRoute){
         send = {
           activity: {
+            module: this.idRoute,
+            idActivity: this.idKey,
             answer: this.userAnswer,
             total: parseInt(this.obtainedResult.toString()).toFixed(),
           },
@@ -124,6 +153,7 @@ export class ActivityComponent implements OnInit {
     })
     if(!this.isActivity)
       send = {answer: this.userAnswer,total: parseInt(this.obtainedResult.toString()).toFixed()}
+      
     this.collectionService.updateDocument(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${this.isActivity ? SERVICES.CHAPTERS : SERVICES.EXAMS}/${this.idRoute}`,send).catch((err)=>{console.log('eerr',err);})
 
   }
