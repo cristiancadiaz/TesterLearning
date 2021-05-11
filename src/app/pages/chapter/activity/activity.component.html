@@ -1,18 +1,19 @@
-<headerComponent></headerComponent>
+<headerComponent *ngIf="!resultUser"></headerComponent>
 <div class="wrapperActivity">
     <div class="mainTitle">
         <h1>{{isActivity ? 'Actividad' : 'Examen Final'}}</h1>
+        <h1>{{resultUser && resultUser.activity.title}}</h1>
     </div>
     <div class="content">
         <ul *ngIf="questions && questions.length > 0" class="activitiesList">
             <form action="">
                 <question *ngFor="let activity of questions" [qst]=activity (handlerResult)="getResult($event)"></question>
                 <div class="d-flex justify-content-center">
-                    <button *ngIf="!showResult" type="button" class="btn btn-primary btn-round" (click)="qualifyActivity()">CALIFICAR</button>
+                    <button *ngIf="!showResult && !resultUser" type="button" class="btn btn-primary btn-round" (click)="qualifyActivity()">CALIFICAR</button>
                 </div>
             </form>
         </ul>
-        <h3 *ngIf="showResult" class="obtainedResult text-center">Tu calificación es de <b [ngClass]="{'text-success': obtainedResult >= 50, 'text-danger': obtainedResult < 50}">{{obtainedResult}}/100</b></h3>
+        <h3 *ngIf="showResult && !resultUser" class="obtainedResult text-center">Tu calificación es de <b [ngClass]="{'text-success': obtainedResult >= 50, 'text-danger': obtainedResult < 50}">{{obtainedResult.toFixed()}}/100</b></h3>
     </div>
 </div>
 

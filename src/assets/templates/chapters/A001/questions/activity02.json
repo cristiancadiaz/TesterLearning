@@ -3,26 +3,30 @@
         "key": "QST1",
         "type": "only-answer",
         "title": "¿Cual es la deficion de error ?",
-        "name": "   ",
+        "name": "QST1_answer",
         "content": [
             {
                 "value": "a",
-                "label": "      "
+                "label": "a. Idea, opinión o expresión que una persona considera correcta pero que en realidad es falsa o desacertada ",
+                "name": "QST1_answer_a"
             },
             {
                 "value": "b",
-                "label": "b. Acción Humana"
+                "label": "b. Acción Humana",
+                "name": "QST1_answer_b"
             },
             {
                 "value": "c",
-                "label": "c. Un choque hormonal"
+                "label": "c. Un choque hormonal",
+                "name": "QST1_answer_c"
             },
             {
+                "name": "QST1_answer_d",
                 "value": "d",
                 "label": "d. Un Televisor"
             }
         ],
-        "answer": ["b"]
+        "answer": "b"
     },
     {
         "key": "QST2",
@@ -32,22 +36,26 @@
         "content": [
             {
                 "value": "a",
-                "label": "a. Error Humano"
+                "label": "a. Error Humano",
+                "name": "QST2_answer_a"
             },
             {
                 "value": "b",
-                "label": "b. Acción Humana"
+                "label": "b. Acción Humana",
+                "name": "QST2_answer_b"
             },
             {
                 "value": "c",
-                "label": "c. Un choque hormonal"
+                "label": "c. Un choque hormonal",
+                "name": "QST2_answer_c"
             },
             {
                 "value": "d",
-                "label": "d. Un Televisor"
+                "label": "d. Un Televisor",
+                "name": "QST2_answer_d"
             }
         ],
-        "answer": ["c"]
+        "answer": "c"
     },
     {
         "key": "QST3",
@@ -55,17 +63,17 @@
         "type": "autocomplete",
         "answer": [
             {
-                "name": "a",
+                "name": "QST3_answer_a",
                 "value": "hola"
             },
             {
-                "name": "b",
+                "name": "QST3_answer_b",
                 "value": "como"
             }
         ],
         "content": [
             {
-                "name": "a",
+                "name": "QST3_answer_a",
                 "type": "input"
             },
             {
@@ -73,7 +81,7 @@
                 "type": "text"
             },
             {
-                "name": "b",
+                "name": "QST3_answer_b",
                 "type": "input"
             }
         ]

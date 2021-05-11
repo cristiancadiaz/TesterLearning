@@ -12,7 +12,8 @@ export class QuestionComponent implements OnInit {
   @Output() handlerResult = new EventEmitter<string>();
   public result: any;
 
-  constructor(public utilService: UtilService) { }
+
+  constructor(public utilService: UtilService) {}
 
   ngOnInit(): void {}
   onItemChange(qst,$event){
@@ -35,5 +36,13 @@ export class QuestionComponent implements OnInit {
         break;
     }
     this.handlerResult.emit(this.result)
+  }
+  getNameToQuestion(name: string){
+    var value = '';
+    this.qst.answerUser.find((item:any)=>{
+      if(item.name == name)
+      value = item.value
+    })
+    return value;
   }
 }
