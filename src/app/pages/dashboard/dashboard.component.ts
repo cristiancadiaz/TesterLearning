@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilService } from '../../services/util.service';
 import { CollectionService } from '../../services/collection.service';
 
 @Component({
@@ -14,14 +15,14 @@ export class DashboardComponent implements OnInit {
   styleObj: any;
  
 
-  constructor(public collectionService: CollectionService) {
+  constructor(public collectionService: CollectionService, private utilService: UtilService) {
   }
   
   ngOnInit() {
-    
+    this.utilService.closeSpinner();
   }
   moduleSelect(item: any){
-    this.itemSelected = item;
+    this.collectionService.moduleSelected = item;
   }
 
 

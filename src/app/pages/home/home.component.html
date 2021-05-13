@@ -13,7 +13,7 @@
                     <h1 class="text-center">{{ flagLogin ? 'Login' : 'Registro' }}</h1>
                     <login *ngIf="flagLogin"></login>
                     <signup *ngIf="!flagLogin"></signup>
-                    <p *ngIf="flagLogin">No tienes una cuenta.<a (click)="flagLogin = false">Registrate</a></p>
+                    <p *ngIf="flagLogin">No tienes una cuenta. <a (click)="flagLogin = false"><b>Registrate</b></a></p>
                     <p *ngIf="!flagLogin">Ya tienes una cuenta ? <a (click)="flagLogin = true">Ingresa</a></p>
                 </div>
             </div>

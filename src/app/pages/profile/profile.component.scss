@@ -41,7 +41,7 @@
         }
     }
     & .wrapperInfo{
-        margin: 7% auto;
+        margin: 220px auto;
         & .card:not(:first-child){
             margin-top: 10%;
         }
@@ -55,6 +55,13 @@
                         background-color: rgba(0, 10, 0, 0.1);
                     }
                 }
+            }
+        }
+    }
+    @media (min-width: 1900px) {
+        & {
+            & .wrapperInfo{
+                margin: 7% auto;
             }
         }
     }

@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
 
   registerForm = new FormGroup({
     displayName: new FormControl(''),
-    photo: new FormControl(''),
+    photo: new FormControl('https://firebasestorage.googleapis.com/v0/b/testerlearning-21e1c.appspot.com/o/Users%2Fdefault%2Fsoccer_balloom.jpg?alt=media&token=0e2a044a-3f03-41ae-8926-bedcfb6e873d'),
     email: new FormControl(''),
     password: new FormControl('')
   })
@@ -37,15 +37,18 @@ export class SignupComponent implements OnInit {
   }
 
   onRegister(){
+    this.utilService.openSpinner();
     this.auth.register(this.registerForm.value).then(()=>{
-      this.utilService.openCustomAlert(TAGS.LABELS.COMPLETE_REGISTER,'success',CONFIG_ALERT.TIMERS.DEFAULT,'top-end');
       this.auth.login(this.registerForm.value).then((res)=>{
         this.chapters.forEach((item)=>{
           this.collectionService.updateDocument(`${SERVICES.USERS}/${res.user.uid}/${SERVICES.CHAPTERS}/${item.key}`, {progress: 0})
         })
+        this.utilService.closeSpinner();
+        this.utilService.openCustomAlert(TAGS.LABELS.COMPLETE_REGISTER,'success',CONFIG_ALERT.TIMERS.DEFAULT,'top-end');
         this.router.navigate(['/dashboard'])
       })
     }).catch((err)=>{
+      this.utilService.closeSpinner();
       for(const index in ERR_AUTH){
         if(ERR_AUTH[index]['CODE'] == err.code)
           this.utilService.openCustomAlert(TAGS.LABELS.ERROR,'error',CONFIG_ALERT.TIMERS.DEFAULT,'top-end',ERR_AUTH[index]['MESSAGE']);

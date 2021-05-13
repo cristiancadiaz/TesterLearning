@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="collapse navbar-collapse ">
         <ul  class="navbar-nav  mr-auto">
-          <li *ngIf="$currentLocation !== '/dashboard' && $currentLocation !== '/'" class="nav-item">
+          <li *ngIf="$currentLocation !== '/dashboard' && $currentLocation !== '/profile' && $currentLocation !== '/'" class="nav-item">
             <button class="nav-link" (click)="goBack()" class="btn btn-primary btn-round">
               <i class="icon-center material-icons">arrow_back_ios</i>
               Volver
