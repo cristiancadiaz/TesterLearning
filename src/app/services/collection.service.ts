@@ -6,6 +6,7 @@ import { Chapter } from '../models/chapter.model';
 export class CollectionService {
 
   public modules: Array<Chapter> = new Array<Chapter>();
+  public moduleSelected: Chapter;
   
   constructor(public db: AngularFirestore) {}
 

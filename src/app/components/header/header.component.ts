@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import {Location} from '@angular/common';
 import { CollectionService } from '../../services/collection.service';
 import { SERVICES } from '../../app.constants';
+import { UtilService } from '../../services/util.service';
 
 
 @Component({
@@ -17,12 +18,14 @@ export class HeaderComponent implements OnInit {
 
   $currentLocation: any;
 
-  constructor(public authService:AuthService, private collectionService: CollectionService, private router: Router, private _location: Location) {
+  constructor(public authService:AuthService,private utilService: UtilService ,private collectionService: CollectionService, private router: Router, private _location: Location) {
     this.currentUser = this.authService.currentUser;
    }
 
   ngOnInit(): void {
+    this.utilService.openSpinner();
     this.$currentLocation = location.pathname;
+    this.collectionService.modules = [];
     this.handlerModulesRender();
   }
 
@@ -43,6 +46,8 @@ export class HeaderComponent implements OnInit {
             await this.handlerUserProgressRender(doc.id).then((result)=>{
               this.collectionService.modules.push({key: doc.id, progress: result.progress, ...doc.data()})
             });
+            this.utilService.closeSpinner();
+            this.collectionService.moduleSelected = this.collectionService.modules[0]
           })
       })
     }

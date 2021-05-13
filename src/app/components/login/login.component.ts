@@ -17,16 +17,19 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl('')
   })
-  constructor(private auth: AuthService, private collectionService: CollectionService, private router: Router, private utilService: UtilService) { }
+  constructor(private auth: AuthService, private router: Router, private utilService: UtilService) { }
 
   ngOnInit(): void {
    
   }
 
   onLogin(){
+    this.utilService.openSpinner();
     this.auth.login(this.loginForm.value).then((res)=>{
+      this.utilService.closeSpinner();
       this.router.navigate(['/dashboard'])
     }).catch((err)=>{
+      this.utilService.closeSpinner();
       for(const index in ERR_AUTH){
         if(ERR_AUTH[index]['CODE'] == err.code)
           this.utilService.openCustomAlert(TAGS.LABELS.ERROR,'error',CONFIG_ALERT.TIMERS.DEFAULT,'top-end',ERR_AUTH[index]['MESSAGE']);

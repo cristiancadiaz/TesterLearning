@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './spinner.component';
-import { SpinnersAngularModule } from 'spinners-angular';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -10,13 +9,13 @@ import { SpinnersAngularModule } from 'spinners-angular';
   ],
   imports: [
     CommonModule,
-    SpinnersAngularModule
+    NgxSpinnerModule
   ],
   exports: [
     SpinnerComponent
   ],
-  entryComponents: [
-  ],
+  entryComponents: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
 })
 export class SpinnerModule { }

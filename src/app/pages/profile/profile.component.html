@@ -22,14 +22,15 @@
                 <p><b>Fecha de Creación: </b>{{this.authService.currentUser.metadata.creationTime}}</p>
             </div>
         </div>
-        <div *ngIf="this.collectionService.modules.length > 0" class="card">
+        <div class="card">
             <div class="card-header card-header-primary">
                 <div class="card-text">
                     <h4 class="card-title text-center"><b>ACTIVIDADES</b></h4>
                   </div>
             </div>
-            <div class="card-body">
-                <table class="table">
+            <div  class="card-body">
+                <h5 *ngIf="!areThereActivities" class="text-center">No se ha iniciado ninguna actividad</h5>
+                <table *ngIf="areThereActivities" class="table">
                     <thead  class="thead-dark">
                       <tr>
                         <th scope="col">MODULO</th>
@@ -41,11 +42,11 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let chapter of chapters; index as i">
-                        <th scope="row">{{chapter.activity ? chapter.activity.module : i+1}}</th>
-                        <td>{{chapter.activity ? chapter.activity.idActivity : i+1}}</td>
-                        <td>{{this.collectionService.modules[i] && chapter.activity.module == this.collectionService.modules[i].key ? this.collectionService.modules[i].title : ''}}</td>
-                        <td>{{chapter.activity ? chapter.activity.total : '0'}}</td>
-                        <td>
+                        <th *ngIf="chapter.activity" scope="row">{{chapter.activity ? chapter.activity.module : i+1}}</th>
+                        <td *ngIf="chapter.activity">{{chapter.activity ? chapter.activity.idActivity : i+1}}</td>
+                        <td *ngIf="chapter.activity">{{this.collectionService.modules[i] && chapter.activity.module == this.collectionService.modules[i].key ? this.collectionService.modules[i].title : ''}}</td>
+                        <td *ngIf="chapter.activity">{{chapter.activity ? chapter.activity.total : '0'}}</td>
+                        <td *ngIf="chapter.activity">
                             <button type="button" class="btn btn-info" (click)="setValueChapter(chapter)" data-toggle="modal" data-target="#openModal">VER RESULTADO</button>
                         </td>
                       </tr>

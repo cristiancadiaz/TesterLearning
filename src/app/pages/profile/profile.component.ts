@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   transformX : number = 565.714;
   positionParalax : string;
   oldValue = 0;
+  areThereActivities = false;
 
   constructor(public authService: AuthService, public collectionService: CollectionService) { 
     this.chapters = new Array<any>();
@@ -42,6 +43,8 @@ export class ProfileComponent implements OnInit {
   getModulesResult(){
     this.collectionService.getCollection(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}`).then((result)=>{
       result.forEach((item) => {
+        if(!this.areThereActivities)
+          this.areThereActivities = item.data().activity && true;
         this.chapters.push({...item.data()})
       });
     })
@@ -49,5 +52,4 @@ export class ProfileComponent implements OnInit {
   setValueChapter(chapter: any){
     this.chapterSelected = chapter;
   }
-
 }

@@ -5,11 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { SignupComponent } from './signup/signup.component';
 import { RouterModule } from '@angular/router';
+import { SpinnerModule } from '../spinner/spinner.module';
 
 @NgModule({
   declarations: [
-      LoginComponent,
-      SignupComponent
+    LoginComponent,
+    SignupComponent,
   ],
   entryComponents: [
     LoginComponent,
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule,
     CommonModule,
+    SpinnerModule,
     ReactiveFormsModule    
   ],
   exports: [

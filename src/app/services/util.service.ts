@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal, { SweetAlertIcon, SweetAlertPosition, SweetAlertResult } from 'sweetalert2'
 
 
 @Injectable()
 export class UtilService {
 
-  constructor(private _sanitizer:DomSanitizer) { }
+  constructor(private _sanitizer:DomSanitizer,private spinner: NgxSpinnerService) { }
 
   openCustomAlert( title : string,icon: SweetAlertIcon, timer: number, position : SweetAlertPosition,text? : string, showConfirmButton : boolean = false){
       return Swal.fire({
@@ -17,6 +18,12 @@ export class UtilService {
         timer,
         showConfirmButton
       })
+  }
+  openSpinner(){
+    this.spinner.show()
+  }
+  closeSpinner(){
+    this.spinner.hide();
   }
 
   openModal( title : string, icon?: SweetAlertIcon, confirmButtonText?: string, cancelButtonText?: string,  text?: string): Promise<SweetAlertResult>{
