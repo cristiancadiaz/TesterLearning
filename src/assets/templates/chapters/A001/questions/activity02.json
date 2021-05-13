@@ -1,0 +1,89 @@
+[
+    {
+        "key": "QST1",
+        "type": "only-answer",
+        "title": "¿Cual es la deficion de error ?",
+        "name": "QST1_answer",
+        "content": [
+            {
+                "value": "a",
+                "label": "a. Idea, opinión o expresión que una persona considera correcta pero que en realidad es falsa o desacertada ",
+                "name": "QST1_answer_a"
+            },
+            {
+                "value": "b",
+                "label": "b. Acción Humana",
+                "name": "QST1_answer_b"
+            },
+            {
+                "value": "c",
+                "label": "c. Un choque hormonal",
+                "name": "QST1_answer_c"
+            },
+            {
+                "name": "QST1_answer_d",
+                "value": "d",
+                "label": "d. Un Televisor"
+            }
+        ],
+        "answer": "b"
+    },
+    {
+        "key": "QST2",
+        "type": "only-answer",
+        "title": "¿Palabra que se utilizan para definir al ser humano del sexo femenino, cuya anatomía genital se define por poseer senos, vagina, vulva, útero, ovarios y trompas de Falopio, su opuesto es el hombre (varón)?",
+        "name": "QST2_answer",
+        "content": [
+            {
+                "value": "a",
+                "label": "a. Error Humano",
+                "name": "QST2_answer_a"
+            },
+            {
+                "value": "b",
+                "label": "b. Acción Humana",
+                "name": "QST2_answer_b"
+            },
+            {
+                "value": "c",
+                "label": "c. Un choque hormonal",
+                "name": "QST2_answer_c"
+            },
+            {
+                "value": "d",
+                "label": "d. Un Televisor",
+                "name": "QST2_answer_d"
+            }
+        ],
+        "answer": "c"
+    },
+    {
+        "key": "QST3",
+        "title": "Diligencie los campos",
+        "type": "autocomplete",
+        "answer": [
+            {
+                "name": "QST3_answer_a",
+                "value": "hola"
+            },
+            {
+                "name": "QST3_answer_b",
+                "value": "como"
+            }
+        ],
+        "content": [
+            {
+                "name": "QST3_answer_a",
+                "type": "input"
+            },
+            {
+                "label": "es uno de los estados de la materia",
+                "type": "text"
+            },
+            {
+                "name": "QST3_answer_b",
+                "type": "input"
+            }
+        ]
+    }
+]

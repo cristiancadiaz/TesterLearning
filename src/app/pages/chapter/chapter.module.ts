@@ -14,6 +14,9 @@ import { QuestionComponent } from '../../components/question/question.component'
     CommonModule,
     ChapterRoutingModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    ActivityComponent
   ]
 })
 export class ChapterModule { }

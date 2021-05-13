@@ -1,0 +1,110 @@
+<headerComponent></headerComponent>
+<div class="profile-content">
+    <div class="parallax-container">
+        <div class="parallax">
+            <img [ngStyle]="{'transform': positionParalax}" src="../../../assets/images/mountains-bg.jpg" alt="">
+            <span class="opacity"></span>
+        </div>
+    </div>
+    <div class="imgProfile">
+        <img class="rounded-circle img-fluid" [src]="this.authService.currentUser.photoURL" alt="">
+    </div>
+    <section class="wrapperInfo container">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <div class="card-text">
+                    <h4 class="card-title text-center"><b>INFORMACIÓN GENERAL</b></h4>
+                  </div>
+            </div>
+            <div class="card-body">
+                <p><b>Correo electronico: </b>{{this.authService.currentUser.email}}</p>
+                <p><b>Nombre Completo: </b>{{this.authService.currentUser.displayName}}</p>
+                <p><b>Fecha de Creación: </b>{{this.authService.currentUser.metadata.creationTime}}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <div class="card-text">
+                    <h4 class="card-title text-center"><b>ACTIVIDADES</b></h4>
+                  </div>
+            </div>
+            <div  class="card-body">
+                <h5 *ngIf="!areThereActivities" class="text-center">No se ha iniciado ninguna actividad</h5>
+                <table *ngIf="areThereActivities" class="table">
+                    <thead  class="thead-dark">
+                      <tr>
+                        <th scope="col">MODULO</th>
+                        <th scope="col"># ACTIVIDAD</th>
+                        <th scope="col">TITULO</th>
+                        <th scope="col">PUNTAJE</th>
+                        <th scope="col">VER</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let chapter of chapters; index as i">
+                        <th *ngIf="chapter.activity" scope="row">{{chapter.activity ? chapter.activity.module : i+1}}</th>
+                        <td *ngIf="chapter.activity">{{chapter.activity ? chapter.activity.idActivity : i+1}}</td>
+                        <td *ngIf="chapter.activity">{{this.collectionService.modules[i] && chapter.activity.module == this.collectionService.modules[i].key ? this.collectionService.modules[i].title : ''}}</td>
+                        <td *ngIf="chapter.activity">{{chapter.activity ? chapter.activity.total : '0'}}</td>
+                        <td *ngIf="chapter.activity">
+                            <button type="button" class="btn btn-info" (click)="setValueChapter(chapter)" data-toggle="modal" data-target="#openModal">VER RESULTADO</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <div class="card-text">
+                    <h4 class="card-title text-center"><b>EXAMENES</b></h4>
+                  </div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col"># ACTIVIDAD</th>
+                        <th scope="col">MODULO</th>
+                        <th scope="col">TITULO</th>
+                        <th scope="col">PUNTAJE</th>
+                        <th scope="col">VER</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>
+                            <button type="button" class="btn btn-info">VER RESULTADO</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- Modal -->
+    <div *ngIf="chapterSelected" class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel"><b>Resultado de la actividad {{chapterSelected.activity.idActivity}} del modulo {{chapterSelected.activity.module}}</b></h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+             <activity [chapter]=chapterSelected></activity>
+             <h3 class="text-center">Tu calificación es de <b [ngClass]="{'text-success': chapterSelected.activity.total >= 50, 'text-danger': chapterSelected.activity.total < 50}">{{chapterSelected.activity.total}}/100</b></h3>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+

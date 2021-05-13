@@ -1,0 +1,68 @@
+.profile-content{
+    margin-top: 3%;
+    & .parallax-container {
+        position: relative;
+        overflow: hidden;
+        height: 500px;
+        & .parallax{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            & > img{
+                opacity: 1;
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                min-width: 100%;
+                min-height: 100%;
+            }
+            & .opacity{
+                background: rgba(215, 44, 44, 0.5);
+                min-height: 500px;
+                position: absolute;
+                top: 1px;
+                display: block;
+                width: 100%;
+            }
+        }
+      
+    }
+    & .imgProfile{
+        position: absolute;
+        display: flex;
+        top: 470px;
+        width: 100%;
+        justify-content: center;
+        & > img{
+            width: 200px;
+        }
+    }
+    & .wrapperInfo{
+        margin: 220px auto;
+        & .card:not(:first-child){
+            margin-top: 10%;
+        }
+        & table{
+            & th, & td{
+                text-align: center;
+            }
+            & > tbody{
+                & > tr{
+                    &:hover{
+                        background-color: rgba(0, 10, 0, 0.1);
+                    }
+                }
+            }
+        }
+    }
+    @media (min-width: 1900px) {
+        & {
+            & .wrapperInfo{
+                margin: 7% auto;
+            }
+        }
+    }
+}

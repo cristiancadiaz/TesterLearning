@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { HeaderModule } from '../../components/header/header.module';
 import { LoginModule } from '../../components/login/login.module';
+import { SpinnerModule } from 'src/app/components/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { LoginModule } from '../../components/login/login.module';
   imports: [
     HomeRoutingModule,
     CommonModule,
+    
     LoginModule,
     HeaderModule,
     FormsModule      

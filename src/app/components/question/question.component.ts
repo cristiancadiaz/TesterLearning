@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'question',
@@ -11,16 +12,37 @@ export class QuestionComponent implements OnInit {
   @Output() handlerResult = new EventEmitter<string>();
   public result: any;
 
-  constructor() { }
+
+  constructor(public utilService: UtilService) {}
 
   ngOnInit(): void {}
-  onItemChange(key: string,$event){
-    this.result = {
-      key,
-      answer: [$event]
+  onItemChange(qst,$event){
+    switch (qst.type) {
+      case 'only-answer':
+        this.result = {
+          type: qst.type,
+          key: qst.key,
+          answer: $event
+        }
+        break;
+      case 'autocomplete':
+        this.result = {
+          type: qst.type,
+          key: qst.key,
+          answer: {name: $event.target.name, value: $event.target.value.toLocaleLowerCase()}
+        }
+        break;
+      default:
+        break;
     }
     this.handlerResult.emit(this.result)
-    
   }
-
+  getNameToQuestion(name: string){
+    var value = '';
+    this.qst.answerUser.find((item:any)=>{
+      if(item.name == name)
+      value = item.value
+    })
+    return value;
+  }
 }

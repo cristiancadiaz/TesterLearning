@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SERVICES } from '../../app.constants';
-import { Chapter } from '../../models/chapter.model';
-import { AuthService } from '../../services/auth.service';
+import { UtilService } from '../../services/util.service';
 import { CollectionService } from '../../services/collection.service';
 
 @Component({
@@ -12,37 +10,20 @@ import { CollectionService } from '../../services/collection.service';
 export class DashboardComponent implements OnInit {
 
  
-  private userProgress: any;
   public itemSelected: any
 
-  public modules: Array<Chapter>;
   styleObj: any;
  
 
-  constructor(public collectionService: CollectionService, private authService:AuthService) {
-    this.modules = new Array<Chapter>();
+  constructor(public collectionService: CollectionService, private utilService: UtilService) {
   }
   
   ngOnInit() {
-    this.handlerModulesRender();
+    this.utilService.closeSpinner();
   }
   moduleSelect(item: any){
-    this.itemSelected = item;
+    this.collectionService.moduleSelected = item;
   }
 
-  async handlerModulesRender(){
-    await this.collectionService.getCollection(SERVICES.CHAPTERS).then((resChapters)=>{
-      resChapters.forEach(async (doc) =>{
-          await this.handlerUserProgressRender(doc.id).then((result)=>{
-            this.modules.push({key: doc.id, progress: result.progress, ...doc.data()})
-          });
-        })
-    })
-  }
-  async handlerUserProgressRender(idChapter:string){
-    return await this.collectionService.getCollectionById(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}/${idChapter}`,).then((result)=>{
-      if(result.exists)
-        return result.data();
-    })
-  }
+
 }

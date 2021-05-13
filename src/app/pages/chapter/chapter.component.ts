@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UtilService } from '../../services/util.service';
 import { SERVICES,ROUTES } from '../../app.constants';
 import { Section } from '../../models/section.model';
 import { AuthService } from '../../services/auth.service';
@@ -18,16 +19,18 @@ export class ChapterComponent implements OnInit {
   private progressPercentage: number = 100;
   private chapterProgress: any
 
-  constructor(private route: ActivatedRoute, private collectionService: CollectionService, private authService: AuthService, private router: Router) {
+  constructor(private route: ActivatedRoute, private collectionService: CollectionService, private authService: AuthService, private utilService: UtilService ,private router: Router) {
     this.sections = new Array<Section>();
   }
 
   ngOnInit(): void {
+    this.utilService.openSpinner();
     this.idChapter = this.route.snapshot.paramMap.get('id');
     this.collectionService.getCollection(`${SERVICES.CHAPTERS}/${this.idChapter}/${SERVICES.SECTIONS}`).then((result)=>{
       result.forEach((doc: any) =>{
         this.sections.push({key: doc.id, ...doc.data()})
       })
+      this.utilService.closeSpinner();
       this.progressPercentage = this.progressPercentage / this.sections.length;
     });
     this.getChaptersByUser();

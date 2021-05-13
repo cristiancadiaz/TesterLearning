@@ -14,12 +14,9 @@ export class DescriptionComponent implements OnInit {
   @Input('item') item: any;
   backgroundImg: any;
 
-  constructor(private router: Router, private _sanitizer:DomSanitizer) {
-    
-  }
+  constructor(private router: Router, private _sanitizer:DomSanitizer) {}
   
   ngOnInit(): void {
-    console.log('item =>', this.item);
     this.backgroundImg = this._sanitizer.bypassSecurityTrustStyle('url(https://firebasestorage.googleapis.com/v0/b/testerlearning-21e1c.appspot.com/o/Dashboard%2FcardDashboard.jpg?alt=media&token=a6bda2df-d5e8-4852-9365-76e88a555035)');
   }
 

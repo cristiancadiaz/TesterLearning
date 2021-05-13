@@ -19,6 +19,7 @@ export const TAGS = {
 };
 export const SERVICES = {
     USERS : 'Users',
+    EXAMS : 'Exams',
     CHAPTERS: 'Chapters',
     SECTIONS : 'Sections',
     ACTIVITIES : 'Activities'
