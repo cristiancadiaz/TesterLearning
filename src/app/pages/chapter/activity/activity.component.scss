@@ -10,6 +10,12 @@
             font-size: 3rem;
         }
     }
+    & .activitiesList{
+        & > li{
+            font-size: 25px;
+        }
+
+    }
     @media (min-width: 1400px) {
         & {
             max-width: 1400px;

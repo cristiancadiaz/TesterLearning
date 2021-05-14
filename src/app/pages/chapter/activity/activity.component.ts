@@ -19,10 +19,12 @@ export class ActivityComponent implements OnInit {
   qualifyValue: number;
   obtainedResult: number = 0;
   showResult:boolean = false;
+  isModal:boolean;
   userAnswer:  Array<Question> = new Array<Question>();
   questions: Array<Question> = [];
   assignRoute: string = '';
   isActivity: boolean;
+  total: number;
 
   @Input('chapter') resultUser: any;
 
@@ -33,23 +35,30 @@ export class ActivityComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    !this.resultUser && this.getQuestions()
-
+    if(!this.resultUser){
+      console.log('ngOnInit');
+      this.getAnswwerUser();
+      this.getQuestions();
+    }
   }
   ngOnChanges(){
+    
     if(this.resultUser){
+      console.log('ngOnChanges');
       this.userAnswer = [];
       this.questions = [];
-      this.idRoute = this.resultUser.activity.module;
-      this.idKey = this.resultUser.activity.idActivity;
-      this.isActivity = true;
-      this.userAnswer.push(...this.resultUser.activity.answer);
+      this.total = -1;
+      this.isModal = false;
+      this.idRoute = this.resultUser.module ? this.resultUser.module : this.resultUser.key;
+      this.idKey = this.resultUser.idActivity ? this.resultUser.idActivity : '';
+      this.isActivity = this.resultUser.idActivity ? true : false;
+      this.getAnswwerUser();
       this.getQuestions();
     }
   
   }
 
-  getQuestions(){
+  async getQuestions(){
      /*  var questions: any = (valueJson as any).default;
     this.collectionService.updateDocument('/Chapters/A001/Activities/ACT001',{
       questions
@@ -57,18 +66,33 @@ export class ActivityComponent implements OnInit {
       console.log('result0', result);
     }) */
     this.assignRoute = this.isActivity ? `${SERVICES.CHAPTERS}/${this.idRoute}/${SERVICES.ACTIVITIES}/${this.idKey}` : `${SERVICES.EXAMS}/EX001`;
-    this.collectionService.getCollectionById(this.assignRoute).then((res)=>{
+    await this.collectionService.getCollectionById(this.assignRoute).then((res)=>{
       if(res.exists){
-        if(this.resultUser){
+        if(this.userAnswer.length){
           res.data().questions.forEach((item,index)=>{
             this.questions.push({answerUser: this.userAnswer[index].answer ? this.userAnswer[index].answer : this.userAnswer[index],...item})
           })
         }else{
           this.questions.push(...res.data().questions)
+          this.generateValueAnswerUser()
         }
       }
-      !this.resultUser && this.generateValueAnswerUser();
     });
+  }
+
+  async getAnswwerUser(){
+    this.assignRoute = `${SERVICES.USERS}/${this.authService.currentUser.uid}/${this.isActivity ? SERVICES.CHAPTERS +'/'+this.idRoute : SERVICES.EXAMS + '/EX001' }`;
+    await this.collectionService.getCollectionById(this.assignRoute).then((res)=>{
+      if(res.exists){
+        if(res.data().activity || res.data().total){
+          this.isModal = true;
+          this.total = res.data().activity ? res.data().activity.total : res.data().total
+          this.userAnswer.push(...res.data().activity ? res.data().activity.answer : res.data().answer);
+        }
+      }
+    });
+    
+
   }
 
   getResult($event: any){
@@ -101,6 +125,7 @@ export class ActivityComponent implements OnInit {
     })
     
   }
+
   qualifyActivity(){
     var qstWithRespond = this.validateAnswerToActivity();
     if(qstWithRespond)
@@ -108,6 +133,8 @@ export class ActivityComponent implements OnInit {
     if(isNaN(qstWithRespond)){
       this.utilService.openModal(TAGS.LABELS.ARE_YOU_SURE,'info',TAGS.LABELS.YES,TAGS.LABELS.NOT).then((result)=>{
         if(result.isConfirmed){
+          console.log('this.userAnswer',this.userAnswer);
+          
           for (const index in this.questions) {
             if(this.questions[index].type == 'only-answer')
               this.questions[index].answer == this.userAnswer[index].answer ? this.obtainedResult += this.qualifyValue : ''
@@ -125,6 +152,7 @@ export class ActivityComponent implements OnInit {
       })
     }
   }
+
   validateAnswerToActivity(): number{
     let assign : string;
     for (const key in this.userAnswer) {
@@ -135,6 +163,7 @@ export class ActivityComponent implements OnInit {
     }
     return parseInt(assign) + 1;
   }
+
   sendResult(){
     this.showResult = !this.showResult;
     var send;
@@ -153,13 +182,12 @@ export class ActivityComponent implements OnInit {
     })
     if(!this.isActivity)
       send = {answer: this.userAnswer,total: parseInt(this.obtainedResult.toString()).toFixed()}
-      
     this.collectionService.updateDocument(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${this.isActivity ? SERVICES.CHAPTERS : SERVICES.EXAMS}/${this.idRoute}`,send).catch((err)=>{console.log('eerr',err);})
-
   }
+
   generateValueAnswerUser(){
     this.qualifyValue = 100 / this.questions.length;
-    this.questions.forEach((item: Question)=>{
+    this.questions.forEach((item: any)=>{
       this.userAnswer.push({key: item.key,answer: []
       })
     })

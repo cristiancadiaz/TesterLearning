@@ -1,5 +1,5 @@
 <div class="form-group" >
-    <h3>{{qst.title}}</h3>
+    <h3 class="title-question">{{qst.title}}</h3>
     <section *ngIf="qst.type=='only-answer'" class="listOptions">
         <p>(Selecione una respuesta)</p>
         <div class="form-check form-check-radio" *ngFor="let item of qst.content">
@@ -21,7 +21,7 @@
             <!-- <div *ngIf="qst.answerUser.length > 0">
                 <input *ngIf="item.type=='input'" class="form-control" type="text" [name]="qst.name" [id]="item.name" >
             </div> -->
-            <p *ngIf="item.type=='text'">{{item.label}}</p>
+            <p class="title-question" *ngIf="item.type=='text'">{{item.label}}</p>
         </label>
     </section>
 </div>

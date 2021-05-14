@@ -1,3 +1,4 @@
+@import "../../../variables.scss";
 .nav-item .nav-link.profile-photo .profile-photo-small{
     border-radius: 50%;
     display: flex;
@@ -5,6 +6,32 @@
     width: 40px;
     &:hover{
         box-shadow: 6px 8px 23px 0px rgba(0,0,0,0.52);
+    }
+}
+.item-menu{
+    margin-left: 10px;
+    cursor: pointer;
+    & > span{
+        color: white;
+        font-weight: bold;
+        opacity: 0;
+        font-size: 0;
+        transition: all 0.5s 0s ease;
+    }
+    & > i {
+        font-size: 50px;
+        color: white;
+    }
+    &:hover{
+        transition: all 0.5s 0s ease;
+        & > span{
+            color: $purple;
+            opacity: 1;
+            font-size: 20px;
+        }
+        & > i{
+            color: $purple;
+        }
     }
 }
 .dropdown-toggle::after{

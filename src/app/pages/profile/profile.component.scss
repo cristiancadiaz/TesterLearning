@@ -1,5 +1,5 @@
 .profile-content{
-    margin-top: 3%;
+    margin-top: 70px;
     & .parallax-container {
         position: relative;
         overflow: hidden;
@@ -65,4 +65,10 @@
             }
         }
     }
+    @media (min-width: 992px){
+        .modal-lg {
+            max-width: 50%;
+        }
+    }
+    
 }

@@ -11,7 +11,8 @@ import { SERVICES } from 'src/app/app.constants';
 export class ProfileComponent implements OnInit {
 
   public chapters: Array<any>;
-  public chapterSelected: any = null;
+  public exams: Array<any>;
+  public itemSelected: any = null;
   transformX : number = 565.714;
   positionParalax : string;
   oldValue = 0;
@@ -19,12 +20,14 @@ export class ProfileComponent implements OnInit {
 
   constructor(public authService: AuthService, public collectionService: CollectionService) { 
     this.chapters = new Array<any>();
+    this.exams = new Array<any>();
   }
 
   ngOnInit(): void {
     this.positionParalax = `translate3d(-50%, ${this.transformX}px, 0px)`
     this.scrollParalax();
-    this.getModulesResult();
+    this.getActivities();
+    this.getExams();
   }
 
   scrollParalax(){
@@ -40,16 +43,25 @@ export class ProfileComponent implements OnInit {
       this.oldValue = newValue;
     }, true);
   }
-  getModulesResult(){
+  getActivities(){
     this.collectionService.getCollection(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.CHAPTERS}`).then((result)=>{
       result.forEach((item) => {
         if(!this.areThereActivities)
           this.areThereActivities = item.data().activity && true;
-        this.chapters.push({...item.data()})
+        if(item.data().activity){
+          this.chapters.push({idActivity:  item.data().activity.idActivity, total:  item.data().activity.total, module:  item.data().activity.module })
+        }
       });
     })
   }
-  setValueChapter(chapter: any){
-    this.chapterSelected = chapter;
+  getExams(){
+    this.collectionService.getCollection(`${SERVICES.USERS}/${this.authService.currentUser.uid}/${SERVICES.EXAMS}`).then((result)=>{
+      result.forEach((item) => {
+        this.exams.push({key: item.id, total: item.data().total})
+      });
+    })
+  }
+  setValueChapter(item: any){
+    this.itemSelected = item;
   }
 }

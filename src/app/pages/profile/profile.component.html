@@ -42,11 +42,11 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let chapter of chapters; index as i">
-                        <th *ngIf="chapter.activity" scope="row">{{chapter.activity ? chapter.activity.module : i+1}}</th>
-                        <td *ngIf="chapter.activity">{{chapter.activity ? chapter.activity.idActivity : i+1}}</td>
-                        <td *ngIf="chapter.activity">{{this.collectionService.modules[i] && chapter.activity.module == this.collectionService.modules[i].key ? this.collectionService.modules[i].title : ''}}</td>
-                        <td *ngIf="chapter.activity">{{chapter.activity ? chapter.activity.total : '0'}}</td>
-                        <td *ngIf="chapter.activity">
+                        <th  scope="row">{{chapter ? chapter.module : i+1}}</th>
+                        <td >{{chapter ? chapter.idActivity : i+1}}</td>
+                        <td >{{this.collectionService.modules[i] && chapter.module == this.collectionService.modules[i].key ? this.collectionService.modules[i].title : ''}}</td>
+                        <td >{{chapter ? chapter.total : '0'}}</td>
+                        <td >
                             <button type="button" class="btn btn-info" (click)="setValueChapter(chapter)" data-toggle="modal" data-target="#openModal">VER RESULTADO</button>
                         </td>
                       </tr>
@@ -61,24 +61,21 @@
                   </div>
             </div>
             <div class="card-body">
-                <table class="table">
-                    <thead>
+              <h5 *ngIf="!exams.length" class="text-center">No se ha realizado ningun examen</h5>
+                <table  *ngIf="exams.length" class="table">
+                    <thead class="thead-dark">
                       <tr>
-                        <th scope="col"># ACTIVIDAD</th>
-                        <th scope="col">MODULO</th>
-                        <th scope="col">TITULO</th>
+                        <th scope="col"># EXAMEN</th>
                         <th scope="col">PUNTAJE</th>
                         <th scope="col">VER</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
+                      <tr *ngFor="let exam of exams; index as i">
+                        <th scope="row">{{exam.key ? exam.key : i+1}}</th>
+                        <td>{{exam.total ? exam.total : 0}}</td>
                         <td>
-                            <button type="button" class="btn btn-info">VER RESULTADO</button>
+                          <button type="button" class="btn btn-info" (click)="setValueChapter(exam)" data-toggle="modal" data-target="#openModal">VER RESULTADO</button>
                         </td>
                       </tr>
                     </tbody>
@@ -87,18 +84,18 @@
         </div>
     </section>
     <!-- Modal -->
-    <div *ngIf="chapterSelected" class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div *ngIf="itemSelected" class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel"><b>Resultado de la actividad {{chapterSelected.activity.idActivity}} del modulo {{chapterSelected.activity.module}}</b></h3>
+            <h3 *ngIf="itemSelected.activity" class="modal-title" id="exampleModalLabel"><b>Resultado de la actividad {{itemSelected.activity.idActivity}} del modulo {{itemSelected.activity.module}}</b></h3>
+            <h3 *ngIf="!itemSelected.activity" class="modal-title" id="exampleModalLabel"><b>Resultado del Examen {{itemSelected.key}}</b></h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
             <div class="modal-body">
-             <activity [chapter]=chapterSelected></activity>
-             <h3 class="text-center">Tu calificación es de <b [ngClass]="{'text-success': chapterSelected.activity.total >= 50, 'text-danger': chapterSelected.activity.total < 50}">{{chapterSelected.activity.total}}/100</b></h3>
+             <activity [chapter]=itemSelected></activity>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>

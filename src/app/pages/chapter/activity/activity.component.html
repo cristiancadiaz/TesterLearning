@@ -2,18 +2,19 @@
 <div class="wrapperActivity">
     <div class="mainTitle">
         <h1>{{isActivity ? 'Actividad' : 'Examen Final'}}</h1>
-        <h1>{{resultUser && resultUser.activity.title}}</h1>
+        <h1 *ngIf="resultUser">{{resultUser.activity && resultUser.activity.title}}</h1>
     </div>
     <div class="content">
-        <ul *ngIf="questions && questions.length > 0" class="activitiesList">
-            <form action="">
-                <question *ngFor="let activity of questions" [qst]=activity (handlerResult)="getResult($event)"></question>
-                <div class="d-flex justify-content-center">
-                    <button *ngIf="!showResult && !resultUser" type="button" class="btn btn-primary btn-round" (click)="qualifyActivity()">CALIFICAR</button>
-                </div>
-            </form>
-        </ul>
-        <h3 *ngIf="showResult && !resultUser" class="obtainedResult text-center">Tu calificación es de <b [ngClass]="{'text-success': obtainedResult >= 50, 'text-danger': obtainedResult < 50}">{{obtainedResult.toFixed()}}/100</b></h3>
+        <ol *ngIf="questions && questions.length > 0" class="activitiesList">
+            <li *ngFor="let activity of questions">
+                <question  [qst]=activity (handlerResult)="getResult($event)"></question>
+            </li>
+        </ol>
+        <div class="d-flex justify-content-center">
+            <button *ngIf="!showResult && !isModal" type="button" class="btn btn-primary btn-round" (click)="qualifyActivity()">CALIFICAR</button>
+        </div>
+        <h3 *ngIf="showResult && !isModal" class="obtainedResult text-center">Tu calificación es de <b [ngClass]="{'text-success': obtainedResult >= 50, 'text-danger': obtainedResult < 50}">{{obtainedResult.toFixed()}}/100</b></h3>
+        <h3 *ngIf="this.userAnswer && total > -1 " class="obtainedResult text-center">Tu calificación es de <b [ngClass]="{'text-success': total >= 50, 'text-danger': total < 50}">{{total}}/100</b></h3>
     </div>
 </div>
 
